@@ -1,4 +1,0 @@
-Sitemap: https://GDufenshuoo.github.io/sitemap.xml
-
-User-agent: *
-Disallow:
