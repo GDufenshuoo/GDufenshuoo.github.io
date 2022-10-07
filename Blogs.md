@@ -10,7 +10,7 @@ Welcome to my blog page - both technical and non-technical. Enjoy :)
 @@left [![](/assets/dft_method.png)](/_posts/2022-09-26-WhatsWrongwithDFTmethod) @@
 @@
 
-### [What's Wrong with DFT Method?](/posts/2022-09-26-WhatsWrongwithDFTmethod)
+### [What's Wrong with DFT Method?](/_posts/2022-09-26-WhatsWrongwithDFTmethod)
 
 ~~~
 <div style="clear: both"></div>
