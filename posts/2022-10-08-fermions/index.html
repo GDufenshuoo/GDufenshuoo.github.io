@@ -9,8 +9,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+   <link rel="stylesheet" href="/libs/highlight/styles/github.min.css">
+   
   <link rel="stylesheet" href="/css/franklin.css">
 <link rel="stylesheet" href="/css/minimal-mistakes.css">
 <link rel="stylesheet" href="/css/adjust.css">
@@ -30,7 +32,7 @@
 </style>
 <![endif]-->
 
-   <title>Tags search</title>  
+   <title>What the Fermions Exchange it really is?</title>  
   <!-- end custom head snippets -->
 </head>
 <body class="layout--single">
@@ -81,40 +83,50 @@
 
 <!-- Content appended here -->
 <div class="franklin-content">
-<h1 id="searching_with_tags"><a href="#searching_with_tags" class="header-anchor"><strong>searching with Tags</strong></a></h1>
-<h2 id="sampling_method"><a href="#sampling_method" class="header-anchor">Sampling Method</a></h2>
-<p>I. <a href="/tag/md"><code>Molecular Dynamics</code></a></p>
-<ul>
-<li><p><a href="/tag/pimd"><code>PIMD</code></a></p>
+<h1 id="what_the_fermions_exchange_it_really_is"><a href="#what_the_fermions_exchange_it_really_is" class="header-anchor">What the Fermions Exchange it really is?</a></h1>
+<h2 id="i_dont_known"><a href="#i_dont_known" class="header-anchor">I don&#39;t known.</a></h2>
+<h2 id="but"><a href="#but" class="header-anchor">But ......</a></h2>
+<p>在 Path Integral 的架构下，交换效应比较简单的写出来；</p>
+<h3 id="对于玻色子的配分函数"><a href="#对于玻色子的配分函数" class="header-anchor">对于玻色子的配分函数：</a></h3>
+<hr />
+\[ N!e^{-\beta V_{Bosons}^{(N)}} =  (e^{-\beta E_{ooo...}} + A_{1}^{1}C_{N}^{2}e^{-\beta E_{(0o...)}} + A_{2}^{2}C_{N}^{3}e^{-\beta E_{(O...)}} ...) \]
+<p>也可以写作迭代形式：</p>
+\[ Ne^{-\beta V_{Bosons}^{(N)}} =  \sum_{k+1}^{N} e^{-\beta (E_N^{(k)} + V_{Bosons}^{(N-k)})} \]
+\[ E_N^{(k)} = \sum_{l=N-k+1}^{N} \sum_{j=1}^{P} E_{string}(r_{l}^{j+1}-r_{l}^{j}) \]
+<p>基本就是 N-k&#43;1 ~ N 的环的所有 String</p>
+<p>复杂度基本上可以控制在多项式内。</p>
+<hr />
+<h3 id="对于费米子的配分函数"><a href="#对于费米子的配分函数" class="header-anchor">对于费米子的配分函数：</a></h3>
+\[ N!e^{-\beta V_{Fermions}^{(N)}} =  (e^{-\beta E_{ooo...}} - A_{1}^{1}C_{N}^{2}e^{-\beta E_{(0o...)}} + A_{2}^{2}C_{N}^{3}e^{-\beta E_{(O...)}} ...) \]
+<p>若是考虑合并成两个符号相反的项</p>
+<p>则有</p>
+\[\begin{aligned} e^{-\beta V_{Fermions}^{(N)}} =  & e^{-\beta E_{ooo...}} + A_{2}^{2}C_{N}^{3}e^{-\beta E_{(O...)}} + ... \\ - & A_{1}^{1}C_{N}^{2}e^{-\beta E_{(0o...)}} + A_{3}^{3}C_{N}^{4}e^{-\beta E_{(O...)}} + ... \end{aligned}\]
+<p>那么轮到我分hu析shuo了：</p>
+<code>为什么这里不能舒服地计算，原因是这个属于震荡函数的积分，非要上 Montecarlo 直接算的话（按都是正的来），就会受制于 &#43;- 的平均符号，叫符号问题（NP hard）（而且 Markiv chain Montecarlo 的许多算法都不能准确各个局域之间的分布）。</code>
+<p>对于现存的解决方法，例如 <code>DMC</code> 之类，通过划分各个符号区域（试探波函数）并限制采样（产生/湮灭）来达到所取皆为正的。<code>VMC</code> （猛）是直接变分算的，效率低下但有效。还有其他各式各样的算法不一一在这里说了。（先挖坑）</p>
+<p>那么对于此我的理解呢，&#40;划掉-<em>是要温柔对待采样</em>-划掉）是这样解释粒子的全同性：</p>
+<ol>
+<li><p>相同自旋的 \(fermions\) 不相互聚集</p>
 </li>
-</ul>
-<p>II.<a href="/tag/mc"><code>Monte Carlo</code></a></p>
-<p>– <a href="/tag/Markiv_chain"><code>Markiv Chain</code></a></p>
-<ul>
-<li><p><a href="/tag/hmc"><code>Harmitonian Monte Carlo</code></a></p>
+<li><p>&#40;5&#41; 式前几项比后几项重要</p>
 </li>
-<li><p><a href="/tag/QMC"><code>Advanced Monte Carlo</code></a></p>
+<li><p>没了</p>
 </li>
-</ul>
-<h2 id="quantum_calculate_method"><a href="#quantum_calculate_method" class="header-anchor">Quantum Calculate method</a></h2>
-<p>I.  <a href="/tag/dft"><code>DFT</code></a> only this is true</p>
-<ul>
-<li><p><a href="/tag/dft_method"><code>Method</code></a></p>
-</li>
-</ul>
-<p>II. <a href="/tag/qmc"><code>QMC</code></a></p>
-<ul>
-<li><p><a href="/tag/pimc"><code>PIMC</code></a></p>
-</li>
-<li><p><a href="/tag/vmc"><code>VMC</code></a></p>
-</li>
-<li><p><a href="/tag/dmc"><code>DMC</code></a></p>
-</li>
-</ul>
-<p>III.<a href="/tag/dmrg"><code>DMRG</code></a> # A powerful Tool</p>
-<h2 id="bosons_fermions"><a href="#bosons_fermions" class="header-anchor">Bosons &amp; Fermions</a></h2>
-<p>I. <a href="/tag/sigh_problem"><code>Sigh Problem</code></a></p>
-<p>II. <a href="/tag/fermions"><code>Fermions</code></a></p>
+</ol>
+<p>那么对于几个相同自旋的 \(fermions\) 来说</p>
+<p>&#40;5&#41; 式结果为正就意味着一件事：\(\begin{aligned}  e^{-\beta E_{ooo...}} & + A_{2}^{2}C_{N}^{3}e^{-\beta E_{(O...)}} + ... \\  大于 & \\ & A_{1}^{1}C_{N}^{2}e^{-\beta E_{(0o...)}} + A_{3}^{3}C_{N}^{4}e^{-\beta E_{(O...)}} + ... \end{aligned}\)</p>
+<p>那么因为 \(fermions\) （下同相同自旋）不聚集 &lt;1&gt;，我们定义：聚集的 \(fermions\) 是同一个 \(fermions\) （合理 \(reasonable\)）那么我们可以保证。\(\begin{aligned}  e^{-\beta E_{ooo...}} > e^{-\beta E_{(0o...)}} \end{aligned}\)</p>
+<p>因为 &lt;1&gt; 我们总会有 \(\begin{aligned}  E_{ooo...} < E_{(0o...)} <  ...   \end{aligned}\) </p>
+<p>则必定会有 &lt;2&gt; </p>
+<p>在绝对零度下 \( \beta \rightarrow \infty \) 那么 \(\begin{aligned}  e^{-\beta E_{ooo...}} > C_{N}^{2}e^{-\beta E_{(0o...)}} \end{aligned}\)</p>
+<p>那么 &lt;2&gt; 我们的结果就必定是正的。</p>
+\( Q.E.D. \)
+<p>...</p>
+<p>.............</p>
+<p>然而，为了保证计算的时候的 &lt;1&gt; 我们需要重新排列采样的粒子，在没有任何优化的情况下：</p>
+\[ \sum_{}^{N}(\sum_{}^{P_1}...\sum_{}^{P_{beads}} E_{String}(P))\]
+<p>复杂度达到了惊人的 \( O( (N!b)^{b}Nb ) \) <code>&#40;beads &amp; Number of Particles&#41;</code></p>
+<p>不过这是后话了（再挖一个坑）</p>
 <div class="page-foot">
     <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Cat GD. Last modified: October 10, 2022.
     Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
@@ -143,6 +155,15 @@
     <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
 
     
+        <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/contrib/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+        <script src="/libs/highlight/highlight.min.js"></script>
+<script>hljs.highlightAll();hljs.configure({tabReplace: '    '});</script>
+
     
   </body>
 </html>
