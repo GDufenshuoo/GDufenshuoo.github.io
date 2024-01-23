@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:media="http://search.yahoo.com/mrss/"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:georss="http://www.georss.org/georss">
+
+  <channel>
+    <title>
+      <![CDATA[  Cat GD&#39;s HomePage  ]]>
+    </title>
+    <link> https://GDufenshuoo.github.io/Blogs/ </link>
+    <description>
+      <![CDATA[  Example website using Franklin  ]]>
+    </description>
+    <atom:link
+      href="https://GDufenshuoo.github.io/Blogs/feed.xml"
+      rel="self"
+      type="application/rss+xml" />
+
+
+<item>
+  <title>
+    <![CDATA[  Graduation Project  ]]>
+  </title>
+  <link> https://GDufenshuoo.github.io/Blogs/posts/2022-02-23-GraduationProject/index.html </link>
+  <guid> https://GDufenshuoo.github.io/Blogs/posts/2022-02-23-GraduationProject/index.html </guid>
+  <description>
+    <![CDATA[  Graduation Project  ]]>
+  </description>  
+    
+  <pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Cat GD</atom:name>
+  </atom:author>
+        
+</item>
+</channel></rss>

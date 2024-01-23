@@ -1,0 +1,199 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.16.4 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <link rel="stylesheet" href="/libs/highlight/styles/github.min.css">
+   
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/minimal-mistakes.css">
+<link rel="stylesheet" href="/css/adjust.css">
+<link rel="icon" href="/assets/favicon.png">
+<!--[if IE ]>
+<style>
+  /* old IE unsupported flexbox fixes */
+  .greedy-nav .site-title {
+    padding-right: 3em;
+  }
+  .greedy-nav button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+  }
+</style>
+<![endif]-->
+
+   <title>Taylor decomposition for Path integral</title>  
+  <!-- end custom head snippets -->
+</head>
+<body class="layout--single">
+  <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">CatGD's</a>
+        <ul class="visible-links">
+          <li class="masthead__menu-item"><a href="/Blogs/" >BLOGS</a></li>
+          <li class="masthead__menu-item"><a href="/Codes/" >Code blocks</a></li>
+          <li class="masthead__menu-item"><a href="/MyPkg/" >More Goodies</a></li>
+          <li class="masthead__menu-item"><a href="/TagPage/">Tags</a></li>
+        </ul>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+  <div class="initial-content">
+    <div id="main" role="main">
+      <div class="sidebar sticky">
+        <div itemscope itemtype="https://schema.org/Person">
+          <div class="author__avatar">
+            <img src="/assets/Fox.jpg" alt="Cat GD" itemprop="image">
+          </div>
+          <div class="author__content">
+            <h3 class="author__name" itemprop="name">Cat GD</h3>
+            <p class="author__bio" itemprop="description">Not very clear.</p>
+          </div>
+          <div class="author__urls-wrapper">
+            <button class="btn btn--inverse">Links</button>
+            <ul class="author__urls social-icons">
+              <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+                <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">China</span></li>
+              <!-- <li><a href="https://twitter.com/mmistakes" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li> -->
+              <li><a href="https://github.com/GDufenshuoo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+<!-- Content appended here -->
+<div class="franklin-content">
+<pre><code class="language-julia">void apply_hamiltonian&#40;double complex *x, double complex *y, double *J, double *h, unsigned L, unsigned long N&#41;&#123;
+	memset&#40;y, 0, N * sizeof&#40;double complex&#41;&#41;;
+
+	for&#40;unsigned i &#61; 0; i &lt; L; i&#43;&#43;&#41;&#123;
+		const unsigned shift1 &#61; &#40;i &#43; 1&#41; &#37; L;
+		const unsigned long pos &#61; 1 &lt;&lt; i;
+		const unsigned long pos1 &#61; 1 &lt;&lt; shift1;
+
+#pragma omp parallel for
+		for&#40;unsigned long k &#61; 0; k &lt; N; k&#43;&#43;&#41;&#123;
+			// sigma^x_i sigma^x_&#123;i&#43;1&#125; &#43; sigma^y_i sigma^y_&#123;i&#43;1&#125;
+			const unsigned long l &#61; k ^ pos ^ pos1;
+			const unsigned sign &#61; &#40;&#40;k &gt;&gt; i&#41; ^ &#40;k &gt;&gt; shift1&#41;&#41; &amp; 1;
+			const double complex termXY &#61; &#40;J&#91;0&#93; &#43; &#40;sign? J&#91;1&#93;:-J&#91;1&#93;&#41;&#41; * x&#91;l&#93;;
+
+			// sigma^z_i sigma^z_&#123;i&#43;1&#125; &#43; h_i sigma^z_i
+			const unsigned signh &#61; &#40;k &gt;&gt; i&#41; &amp; 1;
+			const double couplingZ &#61; &#40;sign? -J&#91;2&#93;:J&#91;2&#93;&#41; &#43; &#40;signh? -h&#91;i&#93;:h&#91;i&#93;&#41;;
+			y&#91;k&#93; -&#61; couplingZ * x&#91;k&#93; &#43; termXY;
+		&#125;
+	&#125;
+&#125;
+
+void taylor17&#40;double complex *x, double complex *y, double *J, double *h, double complex t_step, unsigned L, unsigned long N&#41;&#123;
+	double complex *z &#61; y &#43; N;
+
+	memcpy&#40;y, x, N * sizeof&#40;double complex&#41;&#41;;
+
+	for&#40;unsigned i &#61; 1; i &lt;&#61; 17; i&#43;&#43;&#41;&#123;
+		const double complex norm &#61; conj&#40;t_step&#41; / i;
+
+		apply_hamiltonian&#40;y, z, J, h, L, N&#41;;
+
+#pragma omp parallel for
+		for&#40;unsigned long k &#61; 0; k &lt; N; k&#43;&#43;&#41;&#123;
+			z&#91;k&#93; *&#61; norm;
+			x&#91;k&#93; &#43;&#61; z&#91;k&#93;;
+		&#125;
+
+		double complex *dummy &#61; y;
+		y &#61; z;
+		z &#61; dummy;
+	&#125;
+&#125;</code></pre>
+<pre><code class="language-julia">function apply_hamiltonian&#33;&#40;x::Array&#123;Complex&#123;Float64&#125;, 1&#125;, y::Array&#123;Complex&#123;Float64&#125;, 1&#125;, J::Array&#123;Float64, 1&#125;, h::Array&#123;Float64, 1&#125;, L::Int, N::Int&#41; fill&#33;&#40;y, 0&#41;
+
+	for i in 0:&#40;L-1&#41;
+		shift1 &#61; mod&#40;i&#43;1, L&#41;
+		pos &#61; 1 &lt;&lt; i
+		pos1 &#61; 1 &lt;&lt; shift1
+
+		@inbounds @simd for k in 0:&#40;N-1&#41;
+			l &#61; xor&#40;xor&#40;k, pos&#41;, pos1&#41;
+			sign &#61; &#40;xor&#40;shift&#40;k, i&#41;, shift&#40;k, shift1&#41;&#41; &amp; 1&#41;
+			termXY &#61; &#40;J&#91;1&#93; &#43; &#40;sign ? J&#91;2&#93; : -J&#91;2&#93;&#41;&#41; * x&#91;l&#93;
+
+			signh &#61; shift&#40;k, i&#41; &amp; 1
+			couplingZ &#61; &#40;sign ? -J&#91;3&#93; : J&#91;3&#93;&#41; &#43; &#40;signh ? -h&#91;i&#93; : h&#91;i&#93;&#41;
+			y&#91;k&#93; -&#61; couplingZ * x&#91;k&#93; &#43; termXY
+		end
+	end
+end
+
+function taylor17&#40;x::Array&#123;Complex&#123;Float64&#125;, 1&#125;, y::Array&#123;Complex&#123;Float64&#125;, 1&#125;, J::Array&#123;Float64, 1&#125;, h::Array&#123;Float64, 1&#125;, t_step::Complex&#123;Float64&#125;, L::Int, N::Int&#41; z &#61; view&#40;y, N&#43;1:end&#41;
+
+	y&#91;1:N&#93; .&#61; x&#91;1:N&#93;
+
+	for i in 1:17
+		norm &#61; conj&#40;t_step&#41; / i
+
+		apply_hamiltonian&#33;&#40;y, z, J, h, L, N&#41;
+
+		@inbounds @simd for k in 0:&#40;N-1&#41;
+			z&#91;k&#93; *&#61; norm
+			x&#91;k&#93; &#43;&#61; z&#91;k&#93;
+		end
+
+		y, z &#61; z, y
+	end
+end</code></pre>
+<div class="page-foot">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Cat GD. Last modified: January 23, 2024.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div><!-- CONTENT ENDS HERE -->
+
+      </div> <!-- closure of main -->
+    </div>   <!-- closure of class initial--content -->
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+        <!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+          <ul class="social-icons">
+            <li><strong>Links:</strong></li>
+            <!-- <li><a href="https://twitter.com/mmistakes" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li> -->
+            <li><a href="https://github.com/GDufenshuoo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="page__footer-copyright">&copy; Cat GD. Powered by <a href="https://github.com/tlienart/Franklin.jl">Franklin</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="/libs/minimal-mistakes/main.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
+
+    
+    
+        <script src="/libs/highlight/highlight.min.js"></script>
+<script>hljs.highlightAll();hljs.configure({tabReplace: '    '});</script>
+
+    
+  </body>
+</html>

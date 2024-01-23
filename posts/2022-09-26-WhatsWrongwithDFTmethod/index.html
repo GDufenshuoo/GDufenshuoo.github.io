@@ -1,0 +1,165 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.16.4 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/minimal-mistakes.css">
+<link rel="stylesheet" href="/css/adjust.css">
+<link rel="icon" href="/assets/favicon.png">
+<!--[if IE ]>
+<style>
+  /* old IE unsupported flexbox fixes */
+  .greedy-nav .site-title {
+    padding-right: 3em;
+  }
+  .greedy-nav button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+  }
+</style>
+<![endif]-->
+
+   <title>What's wrong with DFT method?</title>  
+  <!-- end custom head snippets -->
+</head>
+<body class="layout--single">
+  <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">CatGD's</a>
+        <ul class="visible-links">
+          <li class="masthead__menu-item"><a href="/Blogs/" >BLOGS</a></li>
+          <li class="masthead__menu-item"><a href="/Codes/" >Code blocks</a></li>
+          <li class="masthead__menu-item"><a href="/MyPkg/" >More Goodies</a></li>
+          <li class="masthead__menu-item"><a href="/TagPage/">Tags</a></li>
+        </ul>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+  <div class="initial-content">
+    <div id="main" role="main">
+      <div class="sidebar sticky">
+        <div itemscope itemtype="https://schema.org/Person">
+          <div class="author__avatar">
+            <img src="/assets/Fox.jpg" alt="Cat GD" itemprop="image">
+          </div>
+          <div class="author__content">
+            <h3 class="author__name" itemprop="name">Cat GD</h3>
+            <p class="author__bio" itemprop="description">Not very clear.</p>
+          </div>
+          <div class="author__urls-wrapper">
+            <button class="btn btn--inverse">Links</button>
+            <ul class="author__urls social-icons">
+              <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+                <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">China</span></li>
+              <!-- <li><a href="https://twitter.com/mmistakes" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li> -->
+              <li><a href="https://github.com/GDufenshuoo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+<!-- Content appended here -->
+<div class="franklin-content">
+<p>众所周知，DFT 好用，但也不那么好（good enough）用。</p>
+<h1 id="i_b-o_近似"><a href="#i_b-o_近似" class="header-anchor">I. B-O 近似</a></h1>
+<blockquote>
+<p><a href="https://www.zhihu.com/question/360936189/answer/1534680220"><code>Triborg</code> </a>: BO的精髓是原子核的质量是电子的1836倍。北大李新征老师有一幅画画的非常好：</p>
+</blockquote>
+<p><img src="/assets/posts/北大李新征老师有一幅画.png" alt="" /></p>
+<code>X. Z. Li &amp; E. G. Wang, Computer Simulations of Molecules and Condensed Matter, World Science Press &amp; Peking University Press, 2013</code>
+<blockquote>
+<p>Born Oppenheimer近似中的adiabatic的意思和quasisteady一样，都是指离子运动足够慢，每次电子都已经弛豫好了。这和热学里面准静态的含义一致。<a href="https://www.zhihu.com/question/360936189/answer/1534648091"><code>charles &lt;zhihu&gt;</code></a></p>
+</blockquote>
+<h1 id="ii_k-s_方程"><a href="#ii_k-s_方程" class="header-anchor">II. K-S 方程</a></h1>
+<h2 id="dft_将一个相互作用的系统转化成了非相互作用的系统"><a href="#dft_将一个相互作用的系统转化成了非相互作用的系统" class="header-anchor"><ol>
+<li><p>DFT 将一个相互作用的系统，转化成了非相互作用的系统</p>
+</li>
+</ol>
+</a></h2>
+<p>密度泛函理论最普遍的应用是通过Kohn-Sham方法实现的,在Kohn-Sham DFT的框架中，复杂的多体问题（由于处在一个外部静电势中的电子相互作用而产生的）被简化成一个没有相互作用的电子在有效势场中运动的问题。这个有效势场包括了外部势场以及电子间库仑相互作用的影响，例如交换和关联作用。（copy from wiki）</p>
+<blockquote>
+<p>In physics and quantum chemistry, specifically density functional theory, the Kohn–Sham equation is the non-interacting Schrödinger equation &#40;more clearly, Schrödinger-like equation&#41; of a fictitious system &#40;the &quot;Kohn–Sham system&quot;&#41; of non-interacting particles &#40;typically electrons&#41; that generate the same density as any given system of interacting particles. The Kohn–Sham equation is defined by a local effective &#40;fictitious&#41; external potential in which the non-interacting particles move, typically denoted as vs&#40;r&#41; or veff&#40;r&#41;, called the Kohn–Sham potential. If the particles in the Kohn–Sham system are non-interacting fermions &#40;non-fermion DFT has been researched&#41;, the Kohn–Sham wavefunction is a single Slater determinant constructed from a set of orbitals that are the <strong>lowest-energy solutions</strong> to</p>
+</blockquote>
+\[ \left(-\frac{\hbar^2}{2m}\nabla^2 + v_\text{eff}(\mathbf r)\right) \varphi_i(\mathbf r) = \varepsilon_i \varphi_i(\mathbf r) \]
+<p>理论上只要不断拿出逼近准确值的泛函就会得到逐渐接近真实的结果。</p>
+<p>（实际上我认为这只是提供了一个近似，把很难准确计算的部分“扫到了地毯下面”然后拿出一个泛函来代替（代价是什么呢））</p>
+<p>代价是我们拿不到准确的能量，无论是基态的还是所谓的占据轨道与未占据轨道的。并且精度十分依赖所谓的交换关联势。</p>
+<h2 id="ol_start2_系统的总能量表示为电荷密度的泛函"><a href="#ol_start2_系统的总能量表示为电荷密度的泛函" class="header-anchor"><ol start="2">
+<li><p>系统的总能量表示为电荷密度的泛函</p>
+</li>
+</ol>
+</a></h2>
+<p>不可区分粒子对于现实世界有许多“好处”，但对计算来说不太友善（搞不出好&#40;very sample&#41;的模型）</p>
+<p>系统的总能量表示为电荷密度的泛函好的一点在于，符合电子不可区分的性质，不过也导致了所谓的交换关联势，而不是交换势和关联势。</p>
+<p>系统的总能量表示为电荷密度的泛函不好的一点在于，严格上结果只代表所求系统基态，激发态比较难（QMC 也是如此， 不过 PIMC 有个解决方法（困难被统一于所谓符号问题（属于震荡函数积分问题）））。</p>
+<h2 id="ol_start3_k-s_轨道能量几乎没有物理意义"><a href="#ol_start3_k-s_轨道能量几乎没有物理意义" class="header-anchor"><ol start="3">
+<li><p>K-S 轨道能量几乎没有物理意义</p>
+</li>
+</ol>
+</a></h2>
+\[
+E = \sum_i^N \varepsilon_i - E_\text{H}[\rho] + E_\text{xc}[\rho] - \int \frac{\delta E_\text{xc}[\rho]}{\delta\rho(\mathbf r)} \rho(\mathbf{r}) \,d\mathbf{r}
+\]
+<p>很明显这里面根本没有出现 H-F 所定义的一般意义上代表电子占据情况的轨道<code>&#40;小声：我一直很反对轨道的概念，我觉得根本没有这个东西&#41;</code></p>
+<p>这个是我们算激发态的时候困难重重的直接原因。</p>
+<p>但实际上考虑到电子的全同性，考虑各个粒子实际上的位置和能量分布，将会导致复杂度最高接近 </p>
+\[O(N!^N)\]
+<p>以上只是我的一些感想，对于具体的问题<strong>我的建议是直接看</strong> <a href="">量化砖头</a></p>
+<div class="page-foot">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Cat GD. Last modified: January 23, 2024.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div><!-- CONTENT ENDS HERE -->
+
+      </div> <!-- closure of main -->
+    </div>   <!-- closure of class initial--content -->
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+        <!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+          <ul class="social-icons">
+            <li><strong>Links:</strong></li>
+            <!-- <li><a href="https://twitter.com/mmistakes" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li> -->
+            <li><a href="https://github.com/GDufenshuoo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="page__footer-copyright">&copy; Cat GD. Powered by <a href="https://github.com/tlienart/Franklin.jl">Franklin</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="/libs/minimal-mistakes/main.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
+
+    
+        <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/contrib/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+  </body>
+</html>

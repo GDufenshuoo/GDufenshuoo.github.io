@@ -1,0 +1,267 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.16.4 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+   <link rel="stylesheet" href="/libs/highlight/styles/github.min.css">
+   
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/minimal-mistakes.css">
+<link rel="stylesheet" href="/css/adjust.css">
+<link rel="icon" href="/assets/favicon.png">
+<!--[if IE ]>
+<style>
+  /* old IE unsupported flexbox fixes */
+  .greedy-nav .site-title {
+    padding-right: 3em;
+  }
+  .greedy-nav button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+  }
+</style>
+<![endif]-->
+
+   <title></title>  
+  <!-- end custom head snippets -->
+</head>
+<body class="layout--single">
+  <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">CatGD's</a>
+        <ul class="visible-links">
+          <li class="masthead__menu-item"><a href="/Blogs/" >BLOGS</a></li>
+          <li class="masthead__menu-item"><a href="/Codes/" >Code blocks</a></li>
+          <li class="masthead__menu-item"><a href="/MyPkg/" >More Goodies</a></li>
+          <li class="masthead__menu-item"><a href="/TagPage/">Tags</a></li>
+        </ul>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+  <div class="initial-content">
+    <div id="main" role="main">
+      <div class="sidebar sticky">
+        <div itemscope itemtype="https://schema.org/Person">
+          <div class="author__avatar">
+            <img src="/assets/Fox.jpg" alt="Cat GD" itemprop="image">
+          </div>
+          <div class="author__content">
+            <h3 class="author__name" itemprop="name">Cat GD</h3>
+            <p class="author__bio" itemprop="description">Not very clear.</p>
+          </div>
+          <div class="author__urls-wrapper">
+            <button class="btn btn--inverse">Links</button>
+            <ul class="author__urls social-icons">
+              <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+                <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">China</span></li>
+              <!-- <li><a href="https://twitter.com/mmistakes" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li> -->
+              <li><a href="https://github.com/GDufenshuoo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><blockquote>
+<p>请问 The DynamicHMC sampler expects a callable that takes a vector of real numbers, and returns the log posterior and its gradient, wrapped in a DiffResults.DiffResult structure. We use the ContinuousTransformations library to map to &#40;which is constrained to be positive&#41; and &#40;which has to be a lower triangular matrix with rows that have unit Euclidean norm&#41;. The resulting callable now takes a vector of real numbers, and returns a real number. 是什么意思</p>
+</blockquote>
+<hr />
+<p>这段话描述了在使用DynamicHMC采样器时需要传递的可调用函数的要求。该函数应该接受一个实数向量作为输入，并返回包含对数后验概率及其梯度的DiffResults.DiffResult结构。</p>
+<p>为了满足这些要求，使用了ContinuousTransformations库将输入向量映射到一些特殊的约束空间。具体地，输入向量的前几个元素被映射到正实数空间，而最后一些元素被映射到具有特定约束的矩阵空间。映射之后的可调用函数现在接受一个实数向量作为输入，并返回一个实数值作为对数后验概率的估计值。</p>
+<hr />
+<blockquote>
+<p>请问约束空间是什么</p>
+</blockquote>
+<hr />
+<p>约束空间指的是在参数优化或统计建模中，对参数值的限制或限定条件。在某些情况下，约束可以是线性或非线性的，也可以是单个参数的限制或多个参数的组合限制。常见的约束包括非负性、正定性、单调性、平滑性等。</p>
+<p>在上述引用的语境中，使用ContinuousTransformations库将参数向量映射到特定的约束空间中，以确保优化过程中所得到的参数值满足模型的先验知识或其他特定的约束条件。这可以有效地帮助优化器收敛到合理的参数值，并避免无效的参数值。</p>
+<hr />
+<blockquote>
+<p>请问 ContinuousTransformations 库有什么使用说明吗</p>
+</blockquote>
+<hr />
+<p>ContinuousTransformations是一个Julia语言的库，用于在连续空间中定义约束。它提供了一些基本的变换，使得优化或推断过程中的参数满足特定的约束。</p>
+<p>这个库的使用方法可以参考其官方文档，文档中提供了详细的介绍和使用示例。下面是一个简单的示例，演示如何将一个实数向量限制在一个区间内：</p>
+<p>julia</p>
+<pre><code class="language-julia">using ContinuousTransformations
+
+# 将一个长度为3的实数向量映射到区间&#91;0, 1&#93;上
+function my_logdensity&#40;x::Vector&#123;Float64&#125;&#41;
+    transformed_x &#61; Interval&#40;0, 1&#41;.&#40;x&#41;
+    return -sum&#40;log.&#40;transformed_x&#41;&#41;  # 返回一个标量值作为对数后验概率
+end</code></pre>
+<p>在这个例子中，我们定义了一个包含三个实数的向量作为模型的参数。我们使用了<code>Interval</code>变换将向量的每个元素映射到区间</p>
+\[0, 1\]
+<p>上。然后，我们计算了一个标量的值作为对数后验概率的估计，并将其返回。在实际的应用中，我们通常需要更复杂的变换来满足更具体的约束条件。</p>
+<p>总之，ContinuousTransformations库提供了一些基本的变换，使得我们可以在定义优化问题或统计模型时方便地定义参数的约束。我们可以使用这些变换来实现对参数的约束或限制，从而提高优化或推断的效率和准确性。</p>
+<hr />
+<blockquote>
+<p>请问如果需要对一个物理系统中各个粒子的位置进行采样，应该怎样选择变换</p>
+</blockquote>
+<hr />
+<p>在对物理系统中的粒子进行采样时，通常需要考虑的是粒子的位置必须满足特定的几何约束或物理约束。在这种情况下，可以使用ContinuousTransformations库中提供的一些变换来实现对粒子位置的约束。</p>
+<p>例如，如果我们要对一组粒子的位置进行采样，并且要求这些粒子之间的距离不得小于某个阈值，可以使用PositiveDefiniteMatrix变换和EuclideanTransform变换来实现这个约束。具体来说，可以使用PositiveDefiniteMatrix变换来将一个向量映射为一个正定对称矩阵，然后使用EuclideanTransform变换将该矩阵映射为一个下三角矩阵，其中每个行向量的范数为1。这样，我们就可以使用映射后的下三角矩阵来表示粒子之间的距离，并且可以将该矩阵的对角线元素设置为所需的距离阈值。</p>
+<p>下面是一个示例代码，演示如何使用ContinuousTransformations库来实现这个约束：</p>
+<p>julia</p>
+<pre><code class="language-julia">using ContinuousTransformations
+
+# 将一个长度为N*&#40;N&#43;1&#41;/2的实数向量映射为下三角矩阵
+function my_logdensity&#40;x::Vector&#123;Float64&#125;&#41;
+    N &#61; Int&#40;&#40;-1 &#43; sqrt&#40;1 &#43; 8*length&#40;x&#41;&#41;&#41; / 2&#41;
+    P &#61; PositiveDefiniteMatrix&#40;N&#41;
+    L &#61; EuclideanTransform&#40;N, P&#41;.&#40;x&#41;
+    D &#61; Diagonal&#40;L&#41;
+    L &#61; Triu&#40;L, 1&#41; &#43; D
+    # 确保每对粒子之间的距离不小于1
+    for i in 1:N-1, j in i&#43;1:N
+        d &#61; norm&#40;L&#91;j,:&#93; - L&#91;i,:&#93;&#41;
+        if d &lt; 1.0
+            return -Inf  # 返回无穷小的对数概率表示不合法的采样
+        end
+    end
+    return -sum&#40;log.&#40;D&#41;&#41;  # 返回一个标量值作为对数后验概率
+end</code></pre>
+<p>在这个例子中，我们定义了一个包含N个粒子的系统，并使用PositiveDefiniteMatrix和EuclideanTransform变换将一个实数向量映射为一个下三角矩阵。然后，我们计算了每对粒子之间的距离，并将其与所需的距离阈值进行比较，以确保采样结果合法。最后，我们计算了一个标量的值作为对数后验概率的估计，并将其返回。</p>
+<p>需要注意的是，对于复杂的物理系统，可能需要使用更复杂的变换来实现对位置的约束。此外，需要根据具体的问题来选择合适的变换和参数，以确保采样器能够有效地探索参数空间并收敛到合理的参数</p>
+<hr />
+<blockquote>
+<p>请问这是在 MCMC</p>
+</blockquote>
+<hr />
+<p>是的，上述代码是在MCMC中使用ContinuousTransformations库进行参数采样的示例。在MCMC中，我们通常需要从一个高维的参数空间中抽取样本，以估计后验分布或最大后验估计。由于后验分布通常很难直接计算或抽取样本，因此需要使用MCMC算法来实现。</p>
+<p>在MCMC中，我们通过定义一个接受概率和一个转移核函数来从一个状态转移到另一个状态。接受概率是根据新状态与旧状态的对数后验概率差异和转移核函数的值来计算的。转移核函数通常采用随机游走或梯度下降等方法来探索参数空间，并帮助MCMC算法收敛到合理的参数值。</p>
+<p>在这种情况下，使用ContinuousTransformations库中的变换函数可以帮助我们对采样参数进行约束，并且可以将高维参数空间转换为更简单的低维空间，以便更容易实现采样。具体来说，我们可以使用一些变换函数将参数映射到受约束的空间中，并将结果作为转移核函数的输入，以探索受约束的参数空间。</p>
+<hr />
+<blockquote>
+<p>请问可以举一个例子吗，比如如果采样一个 1/r 的分布，应该怎样选择约束</p>
+</blockquote>
+<hr />
+<p>如果我们想要采样一个概率分布 \(p(x) \propto 1/x\)，其中 \(x\) 是一个正实数，我们可以使用一个变换函数 \(y = f(x)\)，将 \(x\) 映射到一个实数 \(y\) 上，并且在 \(y\) 上进行采样。</p>
+<p>我们可以使用一种称为 Box-Cox 变换的方法来实现这个映射。Box-Cox 变换是一种广泛使用的变换方法，可以将任意分布转换为正态分布，它的形式为：</p>
+\[y = \begin{cases} \frac{(x^\lambda - 1)}{\lambda}, & \text{if } \lambda \neq 0 \ \ln(x), & \text{if } \lambda = 0 \end{cases}\]
+<p>其中，\(\lambda\) 是一个实数，用于控制变换的形状。当 \(\lambda=0\) 时，变换就是一个对数变换，当 \(\lambda=1\) 时，变换就是一个恒等变换。</p>
+<p>为了使用 Box-Cox 变换将 \(x\) 映射到一个实数 \(y\) 上，我们需要选择一个适当的 \(\lambda\) 值。通常情况下，我们可以使用最大似然估计或交叉验证等方法来选择最佳的 \(\lambda\) 值。</p>
+<p>在此基础上，我们可以将采样问题转化为在 \(y\) 空间中采样。具体地，我们可以使用 MCMC 算法，在受约束的 \(y\) 空间中进行参数采样。在这种情况下，我们可以使用任何一种 MCMC 算法，例如 Metropolis-Hastings 算法或 Hamiltonian Monte Carlo 算法等，来探索 \(y\) 空间。</p>
+<p>最后，我们可以通过将 \(y\) 值反向变换回 \(x\) 值，得到在原始分布 \(p(x) \propto 1/x\) 上的采样结果。具体来说，反向变换的形式为：</p>
+\[x = \begin{cases} (\lambda y + 1)^{\frac{1}{\lambda}}, & \text{if } \lambda \neq 0 \ e^y, & \text{if } \lambda = 0 \end{cases}\]
+<p>因此，通过使用 Box-Cox 变换和 MCMC 算法，我们可以对 \(1/x\) 分布进行有效的参数采样。需要注意的是，这只是一个示例，实际情况下可能需要根据具体的问题和分布类型选择不同的变换和采样方法。</p>
+<p>dufenshuoo@gmail.com 请问什么是分层贝叶斯</p>
+<p>分层贝叶斯（Hierarchical Bayesian）是一种贝叶斯统计分析方法，用于建立多层级的概率模型，其中每个层级都有自己的概率分布。在分层贝叶斯中，数据被分成多个组或层次，每个组或层次都有自己的概率分布参数。这些参数本身又被看作是随机变量，其先验分布通常也是一个概率分布。因此，分层贝叶斯模型的参数有多个层次，每个层次都有自己的先验分布，每个层次的参数会影响下一层的参数。</p>
+<p>分层贝叶斯通常被用于建立具有复杂层次结构的模型，如社会、生物和医学领域的数据分析等。在这些领域，数据通常存在层次结构，因此需要考虑不同层次之间的关联和影响。通过使用分层贝叶斯，可以在不同层次之间共享信息，并通过推断获得更准确的结果。</p>
+<p>dufenshuoo@gmail.com 你能提供更多的信息吗？ 确定！</p>
+<p>在分层贝叶斯模型中，假设观察到的数据是从概率分布的分层结构生成的。该结构通常由多个级别组成，每个级别对应于一组不同的参数，这些参数控制数据的分布。参数本身通常被假定为从层次结构较高级别的分布中提取的，每个级别都有自己的先验分布。这导致一个模型可以捕获变量和组之间的复杂依赖关系和相关性。</p>
+<p>分层贝叶斯建模的主要优点之一是它允许跨层次结构的不同级别借用信息。通过跨组或跨级别共享信息，模型可以对新数据的参数和预测进行更准确的估计。当每个级别上可用的观测值数量有限，或者当数据在组间变异性或分布存在差异时，这尤其有用。</p>
+<p>分层贝叶斯模型已广泛应用于许多领域，包括社会科学、流行病学、生态学和金融学等。它们可用于各种任务，例如回归分析、聚类、分类和预测等。但是，这些模型的缺点是估计它们的计算成本很高，尤其是在参数或水平的数量很大时。</p>
+<p>dufenshuoo@gmail.com 你能将积分转换为分层贝叶斯模型吗？ \(Z \sim \int\int...\int e^{-U（R）} d R_1 \ldots d R_N\) \(Z\)通常被认为是密度 是的，可以将此积分转换为分层贝叶斯模型。</p>
+<p>一种方法是使用大都会-黑斯廷斯算法，这是一种马尔可夫链蒙特卡洛 （MCMC） 方法，用于从概率分布中抽样。该算法通过迭代提出新状态并根据概率函数接受或拒绝它们，从目标分布生成一系列样本。</p>
+<p>在积分 \(Z\) 的情况下，我们可以将 \(R = （R_1， \ldots， R_N）\) 视为控制数据分布的参数集。目标是通过从 \(R\) 的分布中抽样来估计 \(Z\) 的值。然后，我们可以使用 Metropolis-Hastings 算法从 \(R\) 的分布中生成一系列样本，可用于估计 \(Z\) 的值。</p>
+<p>为了将其转换为分层贝叶斯模型，我们可以在层次结构的每个级别对参数 \(R\) 引入先验分布。然后，我们可以使用 Metropolis-Hastings 算法从给定观测数据的 \(R\) 的后验分布中采样。每个级别的先验分布可以通过前一个级别的数据来告知，从而使我们能够跨层次结构的不同级别借用信息。</p>
+<p>具体来说，我们可以设置以下分层贝叶斯模型：</p>
+<p>先验分布： \(p（R） = p（R_1|\theta_1）p（R_2|\theta_2）...p（R_N|\theta_N）\)，其中 \(\theta_i\) 表示级别 \(i\) 的超参数。</p>
+<p>似然函数：\(p（D|R） = e^{-U（R）}\)，其中 \(D\) 表示观测数据。</p>
+<p>后验分布：\(p（R|D） \propto e^{-U（R）} p（R）\).</p>
+<p>然后，我们可以使用大都会-黑斯廷斯算法从后验分布\(p（R|D）\)，可用于估计 \(Z\) 的值。</p>
+<p>请注意，先验分布和似然函数的具体形式将取决于手头的具体问题。此外，Metropolis-Hastings算法可能需要调整其参数以确保有效的采样。</p>
+<p>dufenshuoo@gmail.com Could you use MuseInterface.jl to solve this problem: </p>
+\(Z \sim \int\int...\int e^{-U(R_1, R_2 ... R_N)} d R_1 \ldots d R_N\)
+<p>Here, \(Z\) is typically considered a density,  while the array \(R_i\) have the same distribution. The function \(U(R_1, R_2 ... R_N)\) can be decomposed into \(\sum {V(R_i) + T(R_i+R_{i+1}) }\).</p>
+<p>The Documents of MuseInterface.jl:  MUSE works on standard hierarchical problems, where the likelihood is of the form:</p>
+<pre><code class="language-math">\mathcal&#123;P&#125;&#40;x\,|\,\theta&#41; &#61; \int &#123;\rm d&#125;z \, \mathcal&#123;P&#125;&#40;x,z\,|\,\theta&#41;</code></pre>
+<p>In our notation, \(x\) are the observed variables &#40;the &quot;data&quot;&#41;, \(z\) are unobserved &quot;latent&quot; variables, and \(\theta\) are some &quot;hyperparameters&quot; of interest. MUSE is applicable when the goal of the analysis is to estimate the hyperparameters, \(\theta\), but otherwise, the latent variables, \(z\), do not need to be inferred &#40;only marginalized out via the integral above&#41;. </p>
+<p>The only requirements to run MUSE on a particular problem are that forward simulations from \(\mathcal{P}(x,z\,|\,\theta)\) can be generated, and gradients of the joint likelihood, \(\mathcal{P}(x,z\,|\,\theta)\) with respect to \(z\) and \(\theta\) can be computed. The marginal likelihood is never required, so MUSE could be considered a form of LFI/SBI. </p>
+<p>It is also possible to use MuseInference without Turing. The MUSE estimate requires three things:</p>
+<ol>
+<li><p>A function which samples from the joint likelihood, \(\mathcal{P}(x,z\,|\,\theta)\), with signature:</p>
+</li>
+</ol>
+<pre><code class="language-julia">function sample_x_z&#40;rng::AbstractRNG, θ&#41;
+       # ...
+       return &#40;;x, z&#41;
+   end</code></pre>
+<p>where <code>rng</code> is an <code>AbstractRNG</code> object which should be used when generating random numbers, <code>θ</code> are the parameters, and return value should be a named tuple <code>&#40;;x, z&#41;</code>. </p>
+<ol start="2">
+<li><p>A function which computes the joint likelihood, \(\mathcal{P}(x,z\,|\,\theta)\), with signature:</p>
+</li>
+</ol>
+<pre><code class="language-julia">function logLike&#40;x, z, θ&#41; 
+       # return log likelihood
+   end</code></pre>
+<p>A user-specifiable automatic differentiation library will be used to take gradients of this function. </p>
+<ol start="3">
+<li><p>A function which computes the prior, \(\mathcal{P}(\theta)\), with signature:</p>
+</li>
+</ol>
+<pre><code class="language-julia">function logPrior&#40;θ&#41;
+       # return log prior
+   end</code></pre>
+<p>If none is provided, the prior is assumed uniform. </p>
+<p>In all cases, <code>x</code>, <code>z</code>, and <code>θ</code>, can be of any type which supports basic arithmetic, including scalars, <code>Vector</code>s, special vector types like <code>ComponentArray</code>s, etc...</p>
+<p>&#33; Based on the given problem statement, it seems that the integral cannot be directly expressed in the form of the likelihood function that is required for MuseInterface.jl. The integral cannot be treated as a joint probability distribution over observed and latent variables.</p>
+<p>However, it is possible to reformulate the problem to fit the likelihood form required by MuseInterface.jl. One possible way to do this is to introduce auxiliary variables that link the variables \(R_i\) in a way that preserves the dependence structure of the original problem.</p>
+<p>One way to introduce these auxiliary variables is to consider the joint probability distribution \(p(R_1,R_2,\ldots,R_N,Z_1,Z_2,\ldots,Z_{N-1})\), where \(Z_i = R_i+R_{i+1}\) for \(1\leq i<N\). This joint distribution can be written as:</p>
+\(p(R_1,R_2,\ldots,R_N,Z_1,Z_2,\ldots,Z_{N-1}) = \frac{1}{Z} e^{-U(R_1,R_2,\ldots,R_N)} \prod_{i=1}^{N-1} \delta(Z_i-R_i-R_{i+1})\)
+<p>where \(\delta\) is the Dirac delta function, and \(Z\) is a normalization constant that ensures the distribution integrates to 1.</p>
+<p>We can integrate out the variables \(Z_1,Z_2,\ldots,Z_{N-1}\) to obtain the marginal distribution of the \(R_i\) variables:</p>
+\(p(R_1,R_2,\ldots,R_N) = \int \prod_{i=1}^{N-1} \delta(Z_i-R_i-R_{i+1}) dZ_1 dZ_2 \ldots dZ_{N-1} \frac{1}{Z} e^{-U(R_1,R_2,\ldots,R_N)}\)
+<p>The integral over \(Z_1,Z_2,\ldots,Z_{N-1}\) can be evaluated using the delta function, which gives:</p>
+<hr />
+<div class="page-foot">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Cat GD. Last modified: January 23, 2024.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div><!-- CONTENT ENDS HERE -->
+
+      </div> <!-- closure of main -->
+    </div>   <!-- closure of class initial--content -->
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+        <!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+          <ul class="social-icons">
+            <li><strong>Links:</strong></li>
+            <!-- <li><a href="https://twitter.com/mmistakes" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li> -->
+            <li><a href="https://github.com/GDufenshuoo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="page__footer-copyright">&copy; Cat GD. Powered by <a href="https://github.com/tlienart/Franklin.jl">Franklin</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="/libs/minimal-mistakes/main.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
+
+    
+        <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/contrib/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+        <script src="/libs/highlight/highlight.min.js"></script>
+<script>hljs.highlightAll();hljs.configure({tabReplace: '    '});</script>
+
+    
+  </body>
+</html>

@@ -1,0 +1,286 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.16.4 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+   <link rel="stylesheet" href="/libs/highlight/styles/github.min.css">
+   
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/minimal-mistakes.css">
+<link rel="stylesheet" href="/css/adjust.css">
+<link rel="icon" href="/assets/favicon.png">
+<!--[if IE ]>
+<style>
+  /* old IE unsupported flexbox fixes */
+  .greedy-nav .site-title {
+    padding-right: 3em;
+  }
+  .greedy-nav button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+  }
+</style>
+<![endif]-->
+
+   <title>What the Fermions Exchange it really is?</title>  
+  <!-- end custom head snippets -->
+</head>
+<body class="layout--single">
+  <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">CatGD's</a>
+        <ul class="visible-links">
+          <li class="masthead__menu-item"><a href="/Blogs/" >BLOGS</a></li>
+          <li class="masthead__menu-item"><a href="/Codes/" >Code blocks</a></li>
+          <li class="masthead__menu-item"><a href="/MyPkg/" >More Goodies</a></li>
+          <li class="masthead__menu-item"><a href="/TagPage/">Tags</a></li>
+        </ul>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+  <div class="initial-content">
+    <div id="main" role="main">
+      <div class="sidebar sticky">
+        <div itemscope itemtype="https://schema.org/Person">
+          <div class="author__avatar">
+            <img src="/assets/Fox.jpg" alt="Cat GD" itemprop="image">
+          </div>
+          <div class="author__content">
+            <h3 class="author__name" itemprop="name">Cat GD</h3>
+            <p class="author__bio" itemprop="description">Not very clear.</p>
+          </div>
+          <div class="author__urls-wrapper">
+            <button class="btn btn--inverse">Links</button>
+            <ul class="author__urls social-icons">
+              <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+                <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">China</span></li>
+              <!-- <li><a href="https://twitter.com/mmistakes" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li> -->
+              <li><a href="https://github.com/GDufenshuoo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><p> <img src="/assets/posts/Exchange path.png" alt="" /></p>
+<h1 id="what_the_fermions_exchange_it_really_is划掉sup_idfnref1a_hreffndef1_classfnref1"><a href="#what_the_fermions_exchange_it_really_is划掉sup_idfnref1a_hreffndef1_classfnref1" class="header-anchor">What the Fermions Exchange it really is?（划掉）<sup id="fnref:1"><a href="#fndef:1" class="fnref">[1]</a></sup></a></h1>
+<h2 id="费米子交换效应的探讨好官方sup_idfnref2a_hreffndef2_classfnref2"><a href="#费米子交换效应的探讨好官方sup_idfnref2a_hreffndef2_classfnref2" class="header-anchor">费米子交换效应的探讨（好官方……）<sup id="fnref:2"><a href="#fndef:2" class="fnref">[2]</a></sup></a></h2>
+<p>在 Path Integral 的架构下，交换效应比较简单的写出来；<sup id="fnref:3"><a href="#fndef:3" class="fnref">[3]</a></sup></p>
+<h3 id="对于玻色子的配分函数sup_idfnrefe1a_hreffndefe1_classfnref4"><a href="#对于玻色子的配分函数sup_idfnrefe1a_hreffndefe1_classfnref4" class="header-anchor">对于玻色子的配分函数：<sup id="fnref:E1"><a href="#fndef:E1" class="fnref">[4]</a></sup></a></h3>
+<hr />
+\[ N!e^{-\beta V_{Bosons}^{(N)}} =  (e^{-\beta E_{ooo...}} + A_{1}^{1}C_{N}^{2}e^{-\beta E_{(0o...)}} + A_{2}^{2}C_{N}^{3}e^{-\beta E_{(O...)}} ...) \]
+<p><sup id="fnref:m1"><a href="#fndef:m1" class="fnref">[5]</a></sup> 也可以写作迭代形式：</p>
+\[ Ne^{-\beta V_{Bosons}^{(N)}} =  \sum_{k+1}^{N} e^{-\beta (E_N^{(k)} + V_{Bosons}^{(N-k)})} \]
+\[ E_N^{(k)} = \sum_{l=N-k+1}^{N} \sum_{j=1}^{P} E_{string}(r_{l}^{j+1}-r_{l}^{j}) \]
+<p>基本就是 N-k&#43;1 ~ N 的环的所有 String</p>
+<p>复杂度基本上可以控制在多项式内。</p>
+<hr />
+<h3 id="对于费米子的配分函数sup_idfnrefe2a_hreffndefe2_classfnref6"><a href="#对于费米子的配分函数sup_idfnrefe2a_hreffndefe2_classfnref6" class="header-anchor">对于费米子的配分函数：<sup id="fnref:E2"><a href="#fndef:E2" class="fnref">[6]</a></sup></a></h3>
+\[ N!e^{-\beta V_{Fermions}^{(N)}} =  (e^{-\beta E_{ooo...}} - A_{1}^{1}C_{N}^{2}e^{-\beta E_{(0o...)}} + A_{2}^{2}C_{N}^{3}e^{-\beta E_{(O...)}} ...) \]
+<sup id="fnref:m2"><a href="#fndef:m2" class="fnref">[7]</a></sup>
+<p>若是考虑合并成两个符号相反的项</p>
+<p>则有</p>
+\[\begin{aligned} N!e^{-\beta V_{Fermions}^{(N)}} = e^{-\beta E_{ooo...}} & + A_{2}^{2}C_{N}^{3}e^{-\beta E_{(O...)}} + ... \\ - & A_{1}^{1}C_{N}^{2}e^{-\beta E_{(0o...)}} + A_{3}^{3}C_{N}^{4}e^{-\beta E_{(O...)}} + ... \end{aligned}\]
+<sup id="fnref:m3"><a href="#fndef:m3" class="fnref">[8]</a></sup>
+<p><table class="fndef" id="fndef:1">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:1">[1]</a></td>
+        <td class="fndef-content">这个网站 Markdown 做不到 T_T.</td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:2">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:2">[2]</a></td>
+        <td class="fndef-content">很学术才是吧</td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:3">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:3">[3]</a></td>
+        <td class="fndef-content">实际上很繁琐。（不过我比较喜欢能画图的表示方法）</td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:E1">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:E1">[4]</a></td>
+        <td class="fndef-content">Hirshberg, Rizzi, and Parrinello, “Path Integral Molecular Dynamics for Bosons.” 实现起来建议不要采用自调用函数形式，我的版本特别慢。</td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:m1">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:m1">[5]</a></td>
+        <td class="fndef-content">这个 O 0 o 自然是代表 三，双，单 玻色子交换的情况啦。</td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:E2">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:E2">[6]</a></td>
+        <td class="fndef-content">Hirshberg, Invernizzi, and Parrinello, “Path Integral Molecular Dynamics for Fermions: Alleviating the Sign Problem with the Bogoliubov Inequality.” 实际上也有迭代的表示但和本文关系不大。</td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:m2">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:m2">[7]</a></td>
+        <td class="fndef-content">这个 O 0 o 也自然是代表 三电子，双电子，单电子 交换的情况啦。</td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:m3">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:m3">[8]</a></td>
+        <td class="fndef-content">没有什么意义但下文分析起来十分有用的一步。</td>
+    </tr>
+</table>
+ 那么轮到我分hu析shuo了：<sup id="fnref:4"><a href="#fndef:4" class="fnref">[9]</a></sup></p>
+<p><code>为什么这里不能舒服地计算，原因是这个属于震荡函数的积分，非要上 Montecarlo 直接算的话（按都是正的来），就会受制于 &#43;- 的平均符号，叫符号问题（NP hard）（而且 Markiv chain Montecarlo 的许多算法都不能准确各个局域之间的分布）。</code><sup id="fnref:5"><a href="#fndef:5" class="fnref">[10]</a></sup> </p>
+<p>对于现存的解决方法，例如 <code>DMC</code> 之类，通过划分各个符号区域（试探波函数）并限制采样（产生/湮灭）来达到所取皆为正的。<code>VMC</code> （猛）是直接变分算的，效率&#40;精度&#41;低下但有效。还有其他各式各样的算法不一一在这里说了。（先挖坑）<sup id="fnref:12"><a href="#fndef:12" class="fnref">[11]</a></sup></p>
+<p>那么对于此我的理解呢，&#40;划掉-<em>是要温柔对待采样</em>-划掉）是这样解释粒子的全同性：</p>
+<ol>
+<li><p>\(fermions\) 不聚集<sup id="fnref:6"><a href="#fndef:6" class="fnref">[12]</a></sup></p>
+</li>
+<li><p>&#40;5&#41; 式前几项比后几项重要</p>
+</li>
+<li><p>没了</p>
+</li>
+</ol>
+<p>那么对于几个相同自旋的 \(fermions\) 来说</p>
+<p>&#40;5&#41; 式结果为正就意味着一件事：\(\begin{aligned}  e^{-\beta E_{ooo...}} & + A_{2}^{2}C_{N}^{3}e^{-\beta E_{(O...)}} + ... \\  大于 & \\ & A_{1}^{1}C_{N}^{2}e^{-\beta E_{(0o...)}} + A_{3}^{3}C_{N}^{4}e^{-\beta E_{(O...)}} + ... \end{aligned}\)</p>
+<p>那么因为 \(fermions\) 不聚集 &lt;1&gt; <sup id="fnref:7"><a href="#fndef:7" class="fnref">[13]</a></sup>，我们定义：聚集的 \(fermions\) 是同一个 \(fermions\) <sup id="fnref:8"><a href="#fndef:8" class="fnref">[14]</a></sup>（合理 \(reasonable\)）那么我们可以保证。\(\begin{aligned}  e^{-\beta E_{ooo...}} > e^{-\beta E_{(0o...)}} \end{aligned}\)</p>
+<p>因为 &lt;1&gt; 我们总会有 \(\begin{aligned}  E_{ooo...} < E_{(0o...)} <  ...   \end{aligned}\) </p>
+<p>则必定会有 &lt;2&gt; </p>
+<p>在绝对零度下 \( \beta \rightarrow \infty \) 那么 \(\begin{aligned}  e^{-\beta E_{ooo...}} > C_{N}^{2}e^{-\beta E_{(0o...)}} \end{aligned}\)</p>
+<p>那么 &lt;2&gt; 我们的结果就必定不会为负数。</p>
+<p>\( Q.E.D. \)<sup id="fnref:9"><a href="#fndef:9" class="fnref">[15]</a></sup></p>
+<p>...</p>
+<p>.............</p>
+<p>然而，为了保证计算的时候的 &lt;1&gt; 我们需要重新排列采样的粒子，在没有任何优化的情况下：<sup id="fnref:10"><a href="#fndef:10" class="fnref">[16]</a></sup></p>
+\[ \sum_{}^{N}(\sum_{}^{P_1}...\sum_{}^{P_{beads}} E_{String}(P))\]
+<sup id="fnref:11"><a href="#fndef:11" class="fnref">[17]</a></sup>
+<p>复杂度达到了惊人的 \( O( (N!b)^{b}Nb ) \) <code>&#40;beads &amp; Number of Particles&#41;</code></p>
+<p>不过这是后话了（再挖一个坑）<sup id="fnref:12"><a href="#fndef:12" class="fnref">[11]</a></sup></p>
+<p><table class="fndef" id="fndef:4">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:4">[9]</a></td>
+        <td class="fndef-content">有理有据令人信服。</td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:5">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:5">[10]</a></td>
+        <td class="fndef-content">各个局域之间的分布不平衡很明显是采样不够，不过很难能达到足够的采样，推荐增强采样方法。</td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:6">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:6">[12]</a></td>
+        <td class="fndef-content">同种同自旋（下同）。这个我觉得应该是没什么问题的吧，毕竟是个费米子。</td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:7">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:7">[13]</a></td>
+        <td class="fndef-content">&lt;1&gt; 就是 1. \(fermions\) 不聚集<sup id="fnref:6"><a href="#fndef:6" class="fnref">[12]</a></sup>，那么聪明的你一定知道下面的……</td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:8">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:8">[14]</a></td>
+        <td class="fndef-content">什么意思呢，就是在 timeslices 间分辨费米子靠的是位置远近，离得最最近就是，离得远的就不是。（不完全是这个意思，因为这个远近是从总的 path 来看的，不过也可以这样认为）</td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:9">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:9">[15]</a></td>
+        <td class="fndef-content">我不是故意这么短的，不过毕竟越简洁越正确（误）。</td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:10">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:10">[16]</a></td>
+        <td class="fndef-content">那肯定有优化啊，先把 N！拿掉再说，说着掏出一个随机优化方法：是蒙特卡洛！（一片失望声，寥寥几个掌声），才怪！是梯度下降！（轻微地欢呼）利用深度学习。（场面一度热烈沸腾，难以维持秩序）。</td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:11">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:11">[17]</a></td>
+        <td class="fndef-content">就是遍历出来所有排列全部路径的权重。（Nb！ /滑稽）</td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:12">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:12">[11]</a></td>
+        <td class="fndef-content">写博客神清气爽，不会鸽不会鸽。</td>
+    </tr>
+</table>
+</p>
+<h1 id="然而_but_however"><a href="#然而_but_however" class="header-anchor">然而 But however </a></h1>
+<p>我们忽略了一点点小小的细节 :&gt;</p>
+<p>对于\( \frac{it}{\hbar}≝\beta\)</p>
+\[ exp\{-\frac{1}{ħ} \sum^{P}_{k} (\frac{\beta \hbar}{P} V_{x_k} + \frac{P}{\beta\hbar}\frac{m}{2} (x_{k+1}-x_k)^2) \} \]
+<p>在 \( T→0\) 有极限 \( \frac{\beta \hbar}{P}→∞\) \( (7) \) 式可以化为 \( exp\{-\frac{1}{ħ} \sum^{P}_{k} \frac{\beta \hbar}{P} V_{x_k} \} \)</p>
+<p>而 \( T→∞\) 有极限 \( \frac{\beta \hbar}{P}→0\) \( (7) \) 式可以化为 \( exp\{-\frac{1}{ħ} \sum^{P}_{k} \frac{P}{\beta\hbar}\frac{m}{2} (x_{k+1}-x_k)^2 \} \)</p>
+<p>写为另一表述有 \( {it}≝\tau\)</p>
+<p>\( \frac{\tau}{P}→0\) 化为 \( exp\{-\frac{1}{ħ} \sum^{P}_{k} \frac{P}{\tau}\frac{m}{2} (x_{k+1}-x_k)^2 \} \)</p>
+<p>\( \frac{\tau}{P}→∞\) 化为 \( exp\{-\frac{1}{ħ} \sum^{P}_{k} \frac{\tau}{P} V_{x_k} \} \)</p>
+<p>事实上可以</p>
+\[ \frac{\beta \hbar}{P} ≝ 1  \]
+<p>保证了上述证明作用不被无穷小化，但有效性还有待商榷。</p>
+<div class="page-foot">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Cat GD. Last modified: January 23, 2024.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div><!-- CONTENT ENDS HERE -->
+
+      </div> <!-- closure of main -->
+    </div>   <!-- closure of class initial--content -->
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+        <!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+          <ul class="social-icons">
+            <li><strong>Links:</strong></li>
+            <!-- <li><a href="https://twitter.com/mmistakes" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li> -->
+            <li><a href="https://github.com/GDufenshuoo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="page__footer-copyright">&copy; Cat GD. Powered by <a href="https://github.com/tlienart/Franklin.jl">Franklin</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="/libs/minimal-mistakes/main.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
+
+    
+        <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/contrib/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+        <script src="/libs/highlight/highlight.min.js"></script>
+<script>hljs.highlightAll();hljs.configure({tabReplace: '    '});</script>
+
+    
+  </body>
+</html>

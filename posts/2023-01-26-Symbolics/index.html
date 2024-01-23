@@ -1,0 +1,184 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.16.4 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <link rel="stylesheet" href="/libs/highlight/styles/github.min.css">
+   
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/minimal-mistakes.css">
+<link rel="stylesheet" href="/css/adjust.css">
+<link rel="icon" href="/assets/favicon.png">
+<!--[if IE ]>
+<style>
+  /* old IE unsupported flexbox fixes */
+  .greedy-nav .site-title {
+    padding-right: 3em;
+  }
+  .greedy-nav button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+  }
+</style>
+<![endif]-->
+
+   <title>Symbolics</title>  
+  <!-- end custom head snippets -->
+</head>
+<body class="layout--single">
+  <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">CatGD's</a>
+        <ul class="visible-links">
+          <li class="masthead__menu-item"><a href="/Blogs/" >BLOGS</a></li>
+          <li class="masthead__menu-item"><a href="/Codes/" >Code blocks</a></li>
+          <li class="masthead__menu-item"><a href="/MyPkg/" >More Goodies</a></li>
+          <li class="masthead__menu-item"><a href="/TagPage/">Tags</a></li>
+        </ul>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+  <div class="initial-content">
+    <div id="main" role="main">
+      <div class="sidebar sticky">
+        <div itemscope itemtype="https://schema.org/Person">
+          <div class="author__avatar">
+            <img src="/assets/Fox.jpg" alt="Cat GD" itemprop="image">
+          </div>
+          <div class="author__content">
+            <h3 class="author__name" itemprop="name">Cat GD</h3>
+            <p class="author__bio" itemprop="description">Not very clear.</p>
+          </div>
+          <div class="author__urls-wrapper">
+            <button class="btn btn--inverse">Links</button>
+            <ul class="author__urls social-icons">
+              <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+                <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">China</span></li>
+              <!-- <li><a href="https://twitter.com/mmistakes" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li> -->
+              <li><a href="https://github.com/GDufenshuoo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+<!-- Content appended here -->
+<div class="franklin-content">
+<h1 id="symbolicsjl"><a href="#symbolicsjl" class="header-anchor">Symbolics.jl</a></h1>
+<p>在这里介绍一个符号推理 pkg: Symbolics.jl  具有十分强大的功能，这里主要关注他对函数的符号化。</p>
+<h2 id="功能优化代码"><a href="#功能优化代码" class="header-anchor">功能：优化代码</a></h2>
+<p>在以下实例中，函数 <code>EInter&#40;x,β,k&#41;</code><sup id="fnref:1"><a href="#fndef:1" class="fnref">[1]</a></sup> 通过构造代数化函数得到了 1000x<sup id="fnref:2"><a href="#fndef:2" class="fnref">[2]</a></sup> 的提升。 <table class="fndef" id="fndef:1">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:1">[1]</a></td>
+        <td class="fndef-content">β, k 为常数</td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:2">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:2">[2]</a></td>
+        <td class="fndef-content">当然会与基本代码的优化有关，但是（尤其是代数并行化之后）加速仍将十分可观。</td>
+    </tr>
+</table>
+</p>
+<h3 id="基本代码"><a href="#基本代码" class="header-anchor">基本代码</a></h3>
+<pre><code class="language-julia">julia&gt; using BenchmarkTools
+julia&gt; X&#61;rand&#40;3,10,5&#41;
+julia&gt; EInter&#40;x,β,k&#41;
+-8.527759190053775 
+
+julia&gt; @benchmark EInter&#40;X,β,k&#41;
+BenchmarkTools.Trial: 10000 samples with 1 evaluation.
+ Range &#40;min … max&#41;:  84.300 μs …  5.042 ms  ┊ GC &#40;min … max&#41;: 0.00&#37; … 97.45&#37;
+ Time  &#40;median&#41;:     89.700 μs              ┊ GC &#40;median&#41;:    0.00&#37;        
+ Time  &#40;mean ± σ&#41;:   97.487 μs ± 77.455 μs  ┊ GC &#40;mean ± σ&#41;:  1.32&#37; ±  1.69&#37;
+ Memory estimate: 23.38 KiB, allocs estimate: 1283.</code></pre>
+<h3 id="代数化函数并特化代码"><a href="#代数化函数并特化代码" class="header-anchor">代数化函数并特化代码</a></h3>
+<p>相当轻松自如，我们可以花费 <code>16.599 ms &#40;122656 allocations: 6.36 MiB&#41;</code> 来得到一个符号化之后的函数表达式。</p>
+<p>这给我们带来了相当大的提升，比 GPU 并行化提升还要巨大，更不必说应用 GPU 等并行技术之后。</p>
+<pre><code class="language-julia">julia&gt; using Symbolics
+julia&gt; @variables P&#91;1:3, 1:10, 1:5&#93;
+julia&gt; @btime EInter&#40;collect&#40;P&#41;,β,k&#41;
+  16.599 ms &#40;122656 allocations: 6.36 MiB&#41;
+0.9416666666666667&#40;abs2&#40;P&#91;1,100,1&#93;-P&#91;1,1,1&#93;&#41;&#43;abs2&#40;P&#91;1,100,2&#93;-P&#91;1,1,2&#93;&#41;...
+
+julia&gt; f&#40;x&#41; &#61; 0.9416666666666667&#40;abs2&#40;P&#91;1,100,1&#93;-P&#91;1,1,1&#93;&#41;&#43;abs2&#40;P&#91;1,...
+julia&gt; f&#40;X&#41;
+-8.527759190053775
+
+julia&gt; @benchmark f&#40;P&#41;
+BenchmarkTools.Trial: 10000 samples with 949 evaluations.
+ Range &#40;min … max&#41;:   93.783 ns …  3.939 μs  ┊ GC &#40;min … max&#41;: 0.00&#37; … 97.07&#37;
+ Time  &#40;median&#41;:     101.054 ns              ┊ GC &#40;median&#41;:    0.00&#37;
+ Time  &#40;mean ± σ&#41;:   107.397 ns ± 57.156 ns  ┊ GC &#40;mean ± σ&#41;:  0.71&#37; ±  1.37&#37;
+ Memory estimate: 16 bytes, allocs estimate: 1.</code></pre>
+<h3 id="进一步简化表达式"><a href="#进一步简化表达式" class="header-anchor">进一步简化表达式</a></h3>
+<p>进一步优化往往十分费时费力 <code>2.360 s &#40;14534168 allocations: 731.25 MiB&#41;</code> 几乎相当于上一步的 <code>100x</code> ，这里不是十分推荐，而且几乎不会有什么提升，但是理论上还可以进一步提升速度（逼近理论上的极限）。</p>
+<pre><code class="language-julia">julia&gt; @btime simplify.&#40;EInter&#40;collect&#40;P&#41;,β,k&#41;&#41;
+  2.360 s &#40;14534168 allocations: 731.25 MiB&#41;
+0.008333333333333304&#40;abs2&#40;P&#91;1, 100, 1&#93; - P&#91;1, 1, 1&#93;&#41; &#43; abs2&#40;P&#91;1, 100, 2&#93;...
+
+julia&gt;g&#40;x&#41;&#61;0.008333333333333304&#40;abs2&#40;P&#91;1,100,1&#93;-P&#91;1,1,1&#93;&#41;&#43;abs2&#40;P&#91;1,100,2&#93;...
+julia&gt; g&#40;X&#41;
+-8.527759190053775
+
+julia&gt; @benchmark g&#40;P&#41;
+BenchmarkTools.Trial: 10000 samples with 947 evaluations.
+ Range &#40;min … max&#41;:   90.919 ns …  3.985 μs  ┊ GC &#40;min … max&#41;: 0.00&#37; … 97.45&#37;
+ Time  &#40;median&#41;:      97.888 ns              ┊ GC &#40;median&#41;:    0.00&#37;       
+ Time  &#40;mean ± σ&#41;:   103.401 ns ± 55.237 ns  ┊ GC &#40;mean ± σ&#41;:  0.73&#37; ±  1.38&#37;
+ Memory estimate: 16 bytes, allocs estimate: 1.</code></pre>
+<h3 id="缺点"><a href="#缺点" class="header-anchor">缺点</a></h3>
+<p>我遇到的缺点就是：符号化之后的代码编译起来有点慢。</p>
+<div class="page-foot">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Cat GD. Last modified: January 23, 2024.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div><!-- CONTENT ENDS HERE -->
+
+      </div> <!-- closure of main -->
+    </div>   <!-- closure of class initial--content -->
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+        <!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+          <ul class="social-icons">
+            <li><strong>Links:</strong></li>
+            <!-- <li><a href="https://twitter.com/mmistakes" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li> -->
+            <li><a href="https://github.com/GDufenshuoo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="page__footer-copyright">&copy; Cat GD. Powered by <a href="https://github.com/tlienart/Franklin.jl">Franklin</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="/libs/minimal-mistakes/main.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
+
+    
+    
+        <script src="/libs/highlight/highlight.min.js"></script>
+<script>hljs.highlightAll();hljs.configure({tabReplace: '    '});</script>
+
+    
+  </body>
+</html>

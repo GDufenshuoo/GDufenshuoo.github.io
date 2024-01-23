@@ -1,0 +1,242 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.16.4 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <link rel="stylesheet" href="/libs/highlight/styles/github.min.css">
+   
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/minimal-mistakes.css">
+<link rel="stylesheet" href="/css/adjust.css">
+<link rel="icon" href="/assets/favicon.png">
+<!--[if IE ]>
+<style>
+  /* old IE unsupported flexbox fixes */
+  .greedy-nav .site-title {
+    padding-right: 3em;
+  }
+  .greedy-nav button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+  }
+</style>
+<![endif]-->
+
+   <title>Examination of the Quasi-Monte Carlo (QMC) Method for EFFECT Path integral for fermions method to calculate 4 electrons in 2D trap</title>  
+  <!-- end custom head snippets -->
+</head>
+<body class="layout--single">
+  <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">CatGD's</a>
+        <ul class="visible-links">
+          <li class="masthead__menu-item"><a href="/Blogs/" >BLOGS</a></li>
+          <li class="masthead__menu-item"><a href="/Codes/" >Code blocks</a></li>
+          <li class="masthead__menu-item"><a href="/MyPkg/" >More Goodies</a></li>
+          <li class="masthead__menu-item"><a href="/TagPage/">Tags</a></li>
+        </ul>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+  <div class="initial-content">
+    <div id="main" role="main">
+      <div class="sidebar sticky">
+        <div itemscope itemtype="https://schema.org/Person">
+          <div class="author__avatar">
+            <img src="/assets/Fox.jpg" alt="Cat GD" itemprop="image">
+          </div>
+          <div class="author__content">
+            <h3 class="author__name" itemprop="name">Cat GD</h3>
+            <p class="author__bio" itemprop="description">Not very clear.</p>
+          </div>
+          <div class="author__urls-wrapper">
+            <button class="btn btn--inverse">Links</button>
+            <ul class="author__urls social-icons">
+              <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+                <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">China</span></li>
+              <!-- <li><a href="https://twitter.com/mmistakes" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li> -->
+              <li><a href="https://github.com/GDufenshuoo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+<!-- Content appended here -->
+<div class="franklin-content">
+<h1 id="title_examination_of_the_quasi-monte_carlo_qmc_method_for_effect_path_integral_for_fermions_method_to_calculate_4_electrons_in_2d_trap"><a href="#title_examination_of_the_quasi-monte_carlo_qmc_method_for_effect_path_integral_for_fermions_method_to_calculate_4_electrons_in_2d_trap" class="header-anchor">Title: Examination of the Quasi-Monte Carlo &#40;QMC&#41; Method for EFFECT Path integral for fermions method to calculate 4 electrons in 2D trap</a></h1>
+<h2 id="date_april_1_2023"><a href="#date_april_1_2023" class="header-anchor">Date: April 1, 2023</a></h2>
+<h2 id="abstract"><a href="#abstract" class="header-anchor">Abstract: </a></h2>
+<p>We explored the use of the Quasi-Monte Carlo &#40;QMC&#41; method, specifically employing the Sobol sequence, for calculating the energy levels of a system of four electrons in a two-dimensional trap. Our experiment utilized the EFFECT Path Integral method for fermions, and the results indicated that the QMC method is not well-suited for this problem.</p>
+<h2 id="introduction"><a href="#introduction" class="header-anchor">Introduction:</a></h2>
+<p>The EFFECT Path Integral method is an advanced numerical technique employed for studying the behavior of fermionic systems. In this experiment, we aimed to investigate the applicability of the Quasi-Monte Carlo &#40;QMC&#41; method, specifically using the Sobol sequence, for a problem involving four electrons in a two-dimensional trap.</p>
+<h2 id="methodology"><a href="#methodology" class="header-anchor">Methodology:</a></h2>
+<p>We implemented the Sobol sequence, a well-known low-discrepancy sequence, as the QMC method in our experiment. Our problem required calculating energy levels based on a Hamiltonian function that incorporated potential energy, electron-electron interactions, and fermionic simulations. We used the Julia programming language and the ForwardDiff package for automatic differentiation.</p>
+<p>The experiment comprised 10,000 energy calculations with varying input parameters from the Sobol sequence. We subsequently analyzed the distribution of energy values and computed the mean energy per particle.</p>
+<h2 id="results"><a href="#results" class="header-anchor">Results:</a></h2>
+<p>Our analysis revealed that the QMC method led to unsatisfactory results in this case. A significant portion of the energy calculations resulted in infinite values, indicating that the method was ill-suited for this problem. Although we filtered out the infinite values and computed the mean energy per particle, this metric was unreliable due to inconsistencies in the energy distribution.</p>
+<h2 id="conclusion"><a href="#conclusion" class="header-anchor">Conclusion:</a></h2>
+<p>Based on our experimental findings, we conclude that the Quasi-Monte Carlo method, specifically using the Sobol sequence, is not suitable for the problem of calculating energy levels for four electrons in a two-dimensional trap using the EFFECT Path Integral method for fermions. Further investigation and alternative numerical approaches should be explored to obtain more accurate and reliable results.</p>
+<h3 id="by_chatgpt-4"><a href="#by_chatgpt-4" class="header-anchor">–By ChatGPT-4</a></h3>
+<h1 id="code"><a href="#code" class="header-anchor">code:</a></h1>
+<pre><code class="language-julia">using Sobol
+using LinearAlgebra
+using Statistics
+
+&quot;&quot;&quot;
+H
+&quot;&quot;&quot;
+function 𝐻&#40;lβ,X&#41;
+    x &#61; reshape&#40;X,2,B,N&#41;
+    return 0.5*𝑈&#40;x&#41;/B &#43; ⋓&#40;x,λ&#41;/B &#43; 𝑇ᴱ&#40;x,lβ&#41;
+end
+
+function 𝑈&#40;x&#41;
+    U &#61; 0.0
+    U &#43;&#61; sum&#40;abs2,x&#41;
+    return U
+end
+
+function ⋓&#40;x,λ&#41;
+    U &#61; 0.0
+    for i in 2:N, j in 1:i-1, b in 1:B
+        U &#43;&#61; λ/sqrt&#40;sum&#40;abs2,x&#91;:,b,i&#93;.-x&#91;:,b,j&#93;&#41;&#41;
+    end
+    return U
+end
+
+&quot;&quot;&quot;
+# The part to simulate fermions
+&quot;&quot;&quot;
+function 𝑇ᴱ&#40;x,β&#41;
+    T &#61; 0.0
+    k &#61; -0.5*B/β
+    for b in 1:B
+        T &#43;&#61; AD&#40;x,b,k&#41;
+    end
+    return log&#40;T^2&#41;/&#40;2k*β&#41;
+end
+
+&quot;&quot;&quot;
+Under developing
+&quot;&quot;&quot;
+function AD&#40;x,b,k&#41;
+    A &#61; zeros&#40;Real,N, N&#41;
+    L &#61; &#40;b &#61;&#61; 1 ? B : b-1&#41;
+    for i in 1:N
+        for j in 1:N
+            A&#91;i,j&#93; &#61; exp&#40;k*sum&#40;abs2,x&#91;:,L,i&#93;.-x&#91;:,b,j&#93;&#41;&#41;
+        end
+    end
+    return det&#40;A&#41;
+end
+
+&quot;&quot;&quot;
+### get the 𝑝
+&quot;&quot;&quot;
+function 𝑝&#40;a,b&#41;
+    p &#61; 0.0
+    for i in 1:3
+        p &#43;&#61; &#40;a&#91;i&#93;-b&#91;i&#93;&#41;^2
+    end
+    return p
+end
+
+N &#61; 4
+B &#61; 45
+β,λ &#61; 10,0.5
+
+&quot;&quot;&quot;
+0.8557738245641116  1.496618732289386   0.36831328304100563
+0.8780146128345013  1.5198062019013956  0.6368870236646227
+&quot;&quot;&quot;
+
+n &#61; 10^2
+s &#61; SobolSeq&#40;2*B*N&#41;
+
+skip&#40;s, n&#41;
+x &#61; next&#33;&#40;s&#41;
+
+using ForwardDiff
+Ene&#40;X&#41; &#61; 𝐻&#40;β,X&#41;# &#43; β*ForwardDiff.derivative&#40;β-&gt;𝐻&#40;β,X&#41;,β&#41;
+
+
+E &#61; &#91;&#93;
+for i in 1:10000
+    next&#33;&#40;s, x&#41;
+    p &#61; &#40;x.-0.5&#41;*6
+    push&#33;&#40;E,Ene&#40;p&#41;&#41;
+end
+
+Ep &#61; &#91;&#93;
+for i in eachindex&#40;E&#41;
+    if E&#91;i&#93; &#33;&#61; Inf
+        push&#33;&#40;Ep,E&#91;i&#93;&#41;
+    end
+end
+
+# Get the distribution
+EEp &#61; exp.&#40;Ep&#41;
+EEp ./&#61; sum&#40;EEp&#41;
+sum&#40;Ep.*EEp&#41;/&#40;β*N&#41;
+
+mean&#40;Ep&#41;/&#40;β*N&#41;;
+
+# minimum&#40;E&#41;
+# maximum&#40;E&#41;
+# A &#61; E./sum&#40;E&#41; 
+# minimum&#40;A&#41;
+# maximum&#40;A&#41;</code></pre>
+<div class="page-foot">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Cat GD. Last modified: January 23, 2024.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div><!-- CONTENT ENDS HERE -->
+
+      </div> <!-- closure of main -->
+    </div>   <!-- closure of class initial--content -->
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+        <!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+          <ul class="social-icons">
+            <li><strong>Links:</strong></li>
+            <!-- <li><a href="https://twitter.com/mmistakes" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li> -->
+            <li><a href="https://github.com/GDufenshuoo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="page__footer-copyright">&copy; Cat GD. Powered by <a href="https://github.com/tlienart/Franklin.jl">Franklin</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="/libs/minimal-mistakes/main.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
+
+    
+    
+        <script src="/libs/highlight/highlight.min.js"></script>
+<script>hljs.highlightAll();hljs.configure({tabReplace: '    '});</script>
+
+    
+  </body>
+</html>
