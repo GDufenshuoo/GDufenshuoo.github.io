@@ -14,5 +14,4 @@ Welcome to my blog page - both technical and non-technical. Enjoy :)
 @@container
 @@[![](/assets/posts/AfunComic.jpeg)]() @@
 @@
-
 @@
