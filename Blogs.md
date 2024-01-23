@@ -9,18 +9,20 @@ Welcome to my blog page - both technical and non-technical. Enjoy :)
 
 ### [1. Records of using Pandoc to convert latex to html](/html/2024-1-23-Pandoc/)
 
-@@
+
+
+
+
+
+
 @@
 @@
 @@row
 @@container
-@@[![](/assets/posts/AfunComic.jpeg)]() @@
+@@
+@@
+@@
+@@[![img](/assets/posts/AfunComic.jpeg)]() @@
 @@
 
 <!-- ### [fermions? `图文不相关`](/posts/2022-10-08-fermions) -->
-
-```
-<div style="clear: both"></div>
-```
-
-@@
