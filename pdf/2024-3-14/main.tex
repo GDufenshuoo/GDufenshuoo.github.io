@@ -1,0 +1,141 @@
+%!TEX program=xelatex
+\documentclass[
+	12pt, % Default font size, values between 10pt-12pt are allowed
+	%letterpaper, % Uncomment for US letter paper size
+	%spanish, % Uncomment for Spanish
+]{fphw}
+
+% 中文的格式
+\usepackage[scheme=plain]{ctex}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+% \setlength{\parskip}{12pt}
+\usepackage{blindtext}
+\linespread{1.2}
+
+% Template-specific packages
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage{graphicx} % Required for including images
+
+\usepackage{booktabs} % Required for better horizontal rules in tables
+
+\usepackage{listings} % Required for insertion of code
+
+\usepackage{enumerate} % To modify the enumerate environment
+
+\usepackage{physics2}
+\usephysicsmodule{braket}
+
+\usepackage{listings} % code
+\usepackage{xcolor}
+
+
+\lstdefinestyle{mystyle}{
+    % numberstyle=\tiny,
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,    
+	keywordstyle=\bfseries\color{NavyBlue}, % 设置关键字为粗体，颜色为 NavyBlue
+	morekeywords={}, % 设置更多的关键字，用逗号分隔
+	emph={self}, % 指定强调词，如果有多个，用逗号隔开
+	emphstyle=\bfseries\color{Rhodamine}, % 强调词样式设置
+	commentstyle=\itshape\color{black!50!white}, % 设置注释样式，斜体，浅灰色
+	stringstyle=\bfseries\color{PineGreen!90!black}, % 设置字符串样式             
+    % numbers=left,                    
+    % numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+	frame=single % 边框
+}
+\lstset{style=mystyle}
+
+\usepackage{fancyref}
+
+\usepackage{listings}
+\lstdefinestyle{Rec}{
+    language        =   Rec, % 语言选Python
+    basicstyle      =   \zihao{-5}\ttfamily,
+    numberstyle     =   \zihao{-5}\ttfamily,
+    keywordstyle    =   \color{blue},
+    keywordstyle    =   [2] \color{teal},
+    stringstyle     =   \color{magenta},
+    commentstyle    =   \color{red}\ttfamily,
+    breaklines      =   true,   % 自动换行，建议不要写太长的行
+    columns         =   fixed,  % 如果不加这一句，字间距就不固定，很丑，必须加
+    basewidth       =   0.5em,
+}
+
+\usepackage{hyperref}
+\hypersetup{hidelinks,
+	colorlinks=true,
+	allcolors=black,
+	pdfstartview=Fit,
+	breaklinks=true}
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+
+
+\title{GDyNets在玻璃化体系中的应用} % Assignment title
+
+\author{王子龙} % Student name
+
+\date{February 2nd, 2024} % Due date
+
+\institute{实验记录} % Institute or school name
+
+\topic{机器学习与玻璃化} % Course or topic name
+
+% \professor{Lanczos}  % Professor or teacher in charge of the assignment
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Output the assignment title, created automatically using the information in the custom commands above
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT CONTENT
+%----------------------------------------------------------------------------------------
+\begin{abstract}
+	
+\end{abstract}
+
+
+% \begin{problem}
+% 	\begin{center}
+
+% 	\end{center}
+% \end{problem}
+
+
+\section{实验思路}\label{Cha:a}
+
+
+\newpage
+\section{实验进度记录}\label{Cha:b}
+\subsection*{日期：2024.3.14}~
+
+整理了各种文献，在粗略地搜索下，大致浏览了一些文献\footnote{见\ref{Appendix:aa}，为略读。}，选择了文献\footnote{Xie, T., France-Lanord, A., Wang, Y., Shao-Horn, Y. \& Grossman, J. C. Graph dynamical networks for unsupervised learning of atomic scale dynamics in materials. Nat Commun 10, 2667 (2019).
+}作为入手点。有以下原因：
+
+\begin{itemize}
+	\item 原理清晰——该文章所用方法\footnote{为基于Koopman方法与MSM方法发展的动力学分析方法，结合了变分法与图机器学习方法加以发展。Koopman方法与MSM方法这两类算法分别在流体力学、工程力学与蛋白质分析领域得到广泛应用。}在蛋白质折叠动力学分析领域已比较完善。
+	\item 领域比较贴近——即使数据分析时需要修改代码也不需要大幅改动。
+	\item 工具开源——得益于作者的开源精神，所需数据与代码全部可以直接获取。\footnote{截止 3.14 下午16:19，在数据重复说明文件的提示下，重复过程正常进行。} 
+\end{itemize}
+
+
+
+
+
+\end{document}
+

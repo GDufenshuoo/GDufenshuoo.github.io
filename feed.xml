@@ -23,6 +23,44 @@
 
 <item>
   <title>
+    <![CDATA[  旧量子论的故事 Story about Old Quantum Theory  ]]>
+  </title>
+  <link> https://GDufenshuoo.github.io/Blogs/posts/2024-07-06-Old-Quantum-Theory/index.html </link>
+  <guid> https://GDufenshuoo.github.io/Blogs/posts/2024-07-06-Old-Quantum-Theory/index.html </guid>
+  <description>
+    <![CDATA[  旧量子论的故事 Story about Old Quantum Theory  ]]>
+  </description>  
+    
+  <pubDate>Sat, 06 Jul 2024 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Cat GD</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Koopman omn glassing system  ]]>
+  </title>
+  <link> https://GDufenshuoo.github.io/Blogs/ReadingNotes/2024-06-03-/index.html </link>
+  <guid> https://GDufenshuoo.github.io/Blogs/ReadingNotes/2024-06-03-/index.html </guid>
+  <description>
+    <![CDATA[  Koopman omn glassing system  ]]>
+  </description>  
+    
+  <pubDate>Mon, 03 Jun 2024 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Cat GD</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
     <![CDATA[  Examination of the Quasi-Monte Carlo &#40;QMC&#41; Method for EFFECT Path integral for fermions method to calculate 4 electrons in 2D trap  ]]>
   </title>
   <link> https://GDufenshuoo.github.io/Blogs/posts/Experiments_Report/Quasi-Monte-Carlo-in-Fermions-Path-Integral/index.html </link>
@@ -103,6 +141,25 @@
   </title>
   <link> https://GDufenshuoo.github.io/Blogs/posts/2023-2-25-PIforFermions/index.html </link>
   <guid> https://GDufenshuoo.github.io/Blogs/posts/2023-2-25-PIforFermions/index.html </guid>
+  <description>
+    <![CDATA[  Path integral for fermions  ]]>
+  </description>  
+    
+  <pubDate>Sat, 25 Feb 2023 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Cat GD</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Path integral for fermions  ]]>
+  </title>
+  <link> https://GDufenshuoo.github.io/Blogs/posts/2024-05-21-learntobeahacker_session_1/index.html </link>
+  <guid> https://GDufenshuoo.github.io/Blogs/posts/2024-05-21-learntobeahacker_session_1/index.html </guid>
   <description>
     <![CDATA[  Path integral for fermions  ]]>
   </description>  
