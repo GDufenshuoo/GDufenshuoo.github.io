@@ -31,7 +31,7 @@
 </style>
 <![endif]-->
 
-   <title>Taylor decomposition for Path integral</title>  
+   <title>Read data from SVG/PDF Figure</title>  
   <!-- end custom head snippets -->
 </head>
 <body class="layout--single">
@@ -82,86 +82,48 @@
 
 <!-- Content appended here -->
 <div class="franklin-content">
-<pre><code class="language-julia">void apply_hamiltonian&#40;double complex *x, double complex *y, double *J, double *h, unsigned L, unsigned long N&#41;&#123;
-	memset&#40;y, 0, N * sizeof&#40;double complex&#41;&#41;;
-
-	for&#40;unsigned i &#61; 0; i &lt; L; i&#43;&#43;&#41;&#123;
-		const unsigned shift1 &#61; &#40;i &#43; 1&#41; &#37; L;
-		const unsigned long pos &#61; 1 &lt;&lt; i;
-		const unsigned long pos1 &#61; 1 &lt;&lt; shift1;
-
-#pragma omp parallel for
-		for&#40;unsigned long k &#61; 0; k &lt; N; k&#43;&#43;&#41;&#123;
-			// sigma^x_i sigma^x_&#123;i&#43;1&#125; &#43; sigma^y_i sigma^y_&#123;i&#43;1&#125;
-			const unsigned long l &#61; k ^ pos ^ pos1;
-			const unsigned sign &#61; &#40;&#40;k &gt;&gt; i&#41; ^ &#40;k &gt;&gt; shift1&#41;&#41; &amp; 1;
-			const double complex termXY &#61; &#40;J&#91;0&#93; &#43; &#40;sign? J&#91;1&#93;:-J&#91;1&#93;&#41;&#41; * x&#91;l&#93;;
-
-			// sigma^z_i sigma^z_&#123;i&#43;1&#125; &#43; h_i sigma^z_i
-			const unsigned signh &#61; &#40;k &gt;&gt; i&#41; &amp; 1;
-			const double couplingZ &#61; &#40;sign? -J&#91;2&#93;:J&#91;2&#93;&#41; &#43; &#40;signh? -h&#91;i&#93;:h&#91;i&#93;&#41;;
-			y&#91;k&#93; -&#61; couplingZ * x&#91;k&#93; &#43; termXY;
-		&#125;
-	&#125;
-&#125;
-
-void taylor17&#40;double complex *x, double complex *y, double *J, double *h, double complex t_step, unsigned L, unsigned long N&#41;&#123;
-	double complex *z &#61; y &#43; N;
-
-	memcpy&#40;y, x, N * sizeof&#40;double complex&#41;&#41;;
-
-	for&#40;unsigned i &#61; 1; i &lt;&#61; 17; i&#43;&#43;&#41;&#123;
-		const double complex norm &#61; conj&#40;t_step&#41; / i;
-
-		apply_hamiltonian&#40;y, z, J, h, L, N&#41;;
-
-#pragma omp parallel for
-		for&#40;unsigned long k &#61; 0; k &lt; N; k&#43;&#43;&#41;&#123;
-			z&#91;k&#93; *&#61; norm;
-			x&#91;k&#93; &#43;&#61; z&#91;k&#93;;
-		&#125;
-
-		double complex *dummy &#61; y;
-		y &#61; z;
-		z &#61; dummy;
-	&#125;
-&#125;</code></pre>
-<pre><code class="language-julia">function apply_hamiltonian&#33;&#40;x::Array&#123;Complex&#123;Float64&#125;, 1&#125;, y::Array&#123;Complex&#123;Float64&#125;, 1&#125;, J::Array&#123;Float64, 1&#125;, h::Array&#123;Float64, 1&#125;, L::Int, N::Int&#41; fill&#33;&#40;y, 0&#41;
-
-	for i in 0:&#40;L-1&#41;
-		shift1 &#61; mod&#40;i&#43;1, L&#41;
-		pos &#61; 1 &lt;&lt; i
-		pos1 &#61; 1 &lt;&lt; shift1
-
-		@inbounds @simd for k in 0:&#40;N-1&#41;
-			l &#61; xor&#40;xor&#40;k, pos&#41;, pos1&#41;
-			sign &#61; &#40;xor&#40;shift&#40;k, i&#41;, shift&#40;k, shift1&#41;&#41; &amp; 1&#41;
-			termXY &#61; &#40;J&#91;1&#93; &#43; &#40;sign ? J&#91;2&#93; : -J&#91;2&#93;&#41;&#41; * x&#91;l&#93;
-
-			signh &#61; shift&#40;k, i&#41; &amp; 1
-			couplingZ &#61; &#40;sign ? -J&#91;3&#93; : J&#91;3&#93;&#41; &#43; &#40;signh ? -h&#91;i&#93; : h&#91;i&#93;&#41;
-			y&#91;k&#93; -&#61; couplingZ * x&#91;k&#93; &#43; termXY
-		end
-	end
-end
-
-function taylor17&#40;x::Array&#123;Complex&#123;Float64&#125;, 1&#125;, y::Array&#123;Complex&#123;Float64&#125;, 1&#125;, J::Array&#123;Float64, 1&#125;, h::Array&#123;Float64, 1&#125;, t_step::Complex&#123;Float64&#125;, L::Int, N::Int&#41; z &#61; view&#40;y, N&#43;1:end&#41;
-
-	y&#91;1:N&#93; .&#61; x&#91;1:N&#93;
-
-	for i in 1:17
-		norm &#61; conj&#40;t_step&#41; / i
-
-		apply_hamiltonian&#33;&#40;y, z, J, h, L, N&#41;
-
-		@inbounds @simd for k in 0:&#40;N-1&#41;
-			z&#91;k&#93; *&#61; norm
-			x&#91;k&#93; &#43;&#61; z&#91;k&#93;
-		end
-
-		y, z &#61; z, y
-	end
-end</code></pre>
+<h2>前言</h2>
+<p>组会上老师提出需要把表格中的数据提取出来这样的任务（属于是一种赛博体力活），根据常年使用PDF编辑器裁切需要的图标的矢量图的经验<sup id="fnref:1"><a href="#fndef:1" class="fnref">[1]</a></sup>， 作为矢量图，必然是有精确的空间信息，再加上应该没人会无聊到加密图形，加上个位移量上去什么的，那从SVG/PDF图表中提取数据不是很合理嘛。 简单搜索一下，发现确实有这么一个还在积极维护的 Python<sup id="fnref:2"><a href="#fndef:2" class="fnref">[2]</a></sup> Pkg， 就是下面要介绍的：</p>
+<h1><a href="https://github.com/echemdb/svgdigitizer">svgdigitizer</a></h1>
+<p>在这里简要介绍一下<sup id="fnref:3"><a href="#fndef:3" class="fnref">[3]</a></sup>。</p>
+<p>除了着重强调的也是我们最关心的 </p>
+<p><strong>extracts metadata associated with the plot in the SVG</strong> </p>
+<p>当然还有许多其他功能，看LOGO&#33; 奇奇怪怪的图（如图）大约也是能提取的。</p>
+<p><img src="/assets/posts/Codes/SVG_Figure/logo.png" alt="" /></p>
+<h3><a href="https://echemdb.github.io/svgdigitizer/usage.html">从PDF中提取</a></h3>
+<ol>
+<li><p>变PDF为SVG：使用 svgdigitizer 命令行输入 <code>svgdigitizer paginate Figure_name.pdf</code> 从 PDF 中创建 SVG。</p>
+<p>官网给了一个离谱的例子（）</p>
+<p><img src="/assets/posts/Codes/SVG_Figure/example_plot_p0.png" alt="" /></p>
+<p>能转换的图最低要：理论上每个坐标轴至少得有两个标数字的刻度线，曲线呢得是 bezier path 可以描绘的，这里应该是指光滑。</p>
+<p>然后结果是这样的：</p>
+<p><img src="/assets/posts/Codes/SVG_Figure/looping_annotated.png" alt="" /></p>
+<p>我觉得应该不需要说什么了，完美！</p>
+</li>
+<li><p>描绘曲线（由于博主关注散点图，这个略去了）</p>
+<p>简而言之就是自己在这条离谱的图像曲线上，放几个关键点来用贝塞尔曲线能画出来，也就是 digital 数字化。请看他的<a href="https://echemdb.github.io/svgdigitizer/usage.html#curve-tracing">文档</a>。</p>
+</li>
+</ol>
+<p>先写到这里，非常好，爱来自加班。</p>
+<p><table class="fndef" id="fndef:1">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:1">[1]</a></td>
+        <td class="fndef-content">实际上很多图都把文章其它部分裁进去了，只不过在边界外（这就是为什么文档会大那么多hhh）所以也没管&#40;&#41;。</td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:2">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:2">[2]</a></td>
+        <td class="fndef-content">不是Python才会觉得意外吧。</td>
+    </tr>
+</table>
+<table class="fndef" id="fndef:3">
+    <tr>
+        <td class="fndef-backref"><a href="#fnref:3">[3]</a></td>
+        <td class="fndef-content">其实官网介绍的很详细了，但是水一水嘛。</td>
+    </tr>
+</table>
+</p>
 <div class="page-foot">
     <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Cat GD. Last modified: October 21, 2024.
     Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.

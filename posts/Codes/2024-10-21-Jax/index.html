@@ -31,7 +31,7 @@
 </style>
 <![endif]-->
 
-   <title>Taylor decomposition for Path integral</title>  
+   <title>Jax & Jax-md</title>  
   <!-- end custom head snippets -->
 </head>
 <body class="layout--single">
@@ -82,86 +82,10 @@
 
 <!-- Content appended here -->
 <div class="franklin-content">
-<pre><code class="language-julia">void apply_hamiltonian&#40;double complex *x, double complex *y, double *J, double *h, unsigned L, unsigned long N&#41;&#123;
-	memset&#40;y, 0, N * sizeof&#40;double complex&#41;&#41;;
-
-	for&#40;unsigned i &#61; 0; i &lt; L; i&#43;&#43;&#41;&#123;
-		const unsigned shift1 &#61; &#40;i &#43; 1&#41; &#37; L;
-		const unsigned long pos &#61; 1 &lt;&lt; i;
-		const unsigned long pos1 &#61; 1 &lt;&lt; shift1;
-
-#pragma omp parallel for
-		for&#40;unsigned long k &#61; 0; k &lt; N; k&#43;&#43;&#41;&#123;
-			// sigma^x_i sigma^x_&#123;i&#43;1&#125; &#43; sigma^y_i sigma^y_&#123;i&#43;1&#125;
-			const unsigned long l &#61; k ^ pos ^ pos1;
-			const unsigned sign &#61; &#40;&#40;k &gt;&gt; i&#41; ^ &#40;k &gt;&gt; shift1&#41;&#41; &amp; 1;
-			const double complex termXY &#61; &#40;J&#91;0&#93; &#43; &#40;sign? J&#91;1&#93;:-J&#91;1&#93;&#41;&#41; * x&#91;l&#93;;
-
-			// sigma^z_i sigma^z_&#123;i&#43;1&#125; &#43; h_i sigma^z_i
-			const unsigned signh &#61; &#40;k &gt;&gt; i&#41; &amp; 1;
-			const double couplingZ &#61; &#40;sign? -J&#91;2&#93;:J&#91;2&#93;&#41; &#43; &#40;signh? -h&#91;i&#93;:h&#91;i&#93;&#41;;
-			y&#91;k&#93; -&#61; couplingZ * x&#91;k&#93; &#43; termXY;
-		&#125;
-	&#125;
-&#125;
-
-void taylor17&#40;double complex *x, double complex *y, double *J, double *h, double complex t_step, unsigned L, unsigned long N&#41;&#123;
-	double complex *z &#61; y &#43; N;
-
-	memcpy&#40;y, x, N * sizeof&#40;double complex&#41;&#41;;
-
-	for&#40;unsigned i &#61; 1; i &lt;&#61; 17; i&#43;&#43;&#41;&#123;
-		const double complex norm &#61; conj&#40;t_step&#41; / i;
-
-		apply_hamiltonian&#40;y, z, J, h, L, N&#41;;
-
-#pragma omp parallel for
-		for&#40;unsigned long k &#61; 0; k &lt; N; k&#43;&#43;&#41;&#123;
-			z&#91;k&#93; *&#61; norm;
-			x&#91;k&#93; &#43;&#61; z&#91;k&#93;;
-		&#125;
-
-		double complex *dummy &#61; y;
-		y &#61; z;
-		z &#61; dummy;
-	&#125;
-&#125;</code></pre>
-<pre><code class="language-julia">function apply_hamiltonian&#33;&#40;x::Array&#123;Complex&#123;Float64&#125;, 1&#125;, y::Array&#123;Complex&#123;Float64&#125;, 1&#125;, J::Array&#123;Float64, 1&#125;, h::Array&#123;Float64, 1&#125;, L::Int, N::Int&#41; fill&#33;&#40;y, 0&#41;
-
-	for i in 0:&#40;L-1&#41;
-		shift1 &#61; mod&#40;i&#43;1, L&#41;
-		pos &#61; 1 &lt;&lt; i
-		pos1 &#61; 1 &lt;&lt; shift1
-
-		@inbounds @simd for k in 0:&#40;N-1&#41;
-			l &#61; xor&#40;xor&#40;k, pos&#41;, pos1&#41;
-			sign &#61; &#40;xor&#40;shift&#40;k, i&#41;, shift&#40;k, shift1&#41;&#41; &amp; 1&#41;
-			termXY &#61; &#40;J&#91;1&#93; &#43; &#40;sign ? J&#91;2&#93; : -J&#91;2&#93;&#41;&#41; * x&#91;l&#93;
-
-			signh &#61; shift&#40;k, i&#41; &amp; 1
-			couplingZ &#61; &#40;sign ? -J&#91;3&#93; : J&#91;3&#93;&#41; &#43; &#40;signh ? -h&#91;i&#93; : h&#91;i&#93;&#41;
-			y&#91;k&#93; -&#61; couplingZ * x&#91;k&#93; &#43; termXY
-		end
-	end
-end
-
-function taylor17&#40;x::Array&#123;Complex&#123;Float64&#125;, 1&#125;, y::Array&#123;Complex&#123;Float64&#125;, 1&#125;, J::Array&#123;Float64, 1&#125;, h::Array&#123;Float64, 1&#125;, t_step::Complex&#123;Float64&#125;, L::Int, N::Int&#41; z &#61; view&#40;y, N&#43;1:end&#41;
-
-	y&#91;1:N&#93; .&#61; x&#91;1:N&#93;
-
-	for i in 1:17
-		norm &#61; conj&#40;t_step&#41; / i
-
-		apply_hamiltonian&#33;&#40;y, z, J, h, L, N&#41;
-
-		@inbounds @simd for k in 0:&#40;N-1&#41;
-			z&#91;k&#93; *&#61; norm
-			x&#91;k&#93; &#43;&#61; z&#91;k&#93;
-		end
-
-		y, z &#61; z, y
-	end
-end</code></pre>
+<h1 id="jax"><a href="#jax" class="header-anchor">JAX</a></h1>
+<p>听说JAX很快，&#40;很快啊&#41;之前一直没有什么印象，但是当了解到JAX-MD之后（虽然很长一段时间古井无波 for Molly.jl）最近偶然发现他居然可以使用 Swap-MonteCarlo 制造低温玻璃，专业所需嘛，就来了解一下，顺便写篇博客。</p>
+<p>从比较广泛的介绍上看呢，JAX 作为 Google 开源的工具（当然不知为何2022年之后Google的一些杂七杂八的开源项目好像都淡化了官方背景）做的真的蛮不错的，至少比Numpy快（这不就够了嘛）。 和julia一样是即时编译，支持自动微分和并行化，可以运行在 CPU, GPU, &amp; TPU（尤其是 Google 自家的TPU，很合理，可以在 Colab 免费体验（虽然免费但还蛮好用的））。</p>
+<h2 id="写在一切之前的序"><a href="#写在一切之前的序" class="header-anchor">写在一切之前的序</a></h2>
 <div class="page-foot">
     <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Cat GD. Last modified: October 21, 2024.
     Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
