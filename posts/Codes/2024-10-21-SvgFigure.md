@@ -40,7 +40,7 @@ tags = ["Quantum"]
 
     然后结果是这样的：
 
-    ![](/assets/posts/Codes/SVG_Figure/looping_annotated.png)
+    ![](/assets/posts/Codes/SVG_Figure/results.png)
 
     我觉得应该不需要说什么了，完美！
 
