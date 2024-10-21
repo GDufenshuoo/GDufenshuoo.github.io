@@ -12,6 +12,16 @@ Welcome to my blog page - both technical and non-technical. Enjoy :)
 
 ### [2. Records of using Julia to code my idea  `TO DO`](/html/2024-1-24-Pandoc/)
 
+
+@@row
+@@container
+@@left [![](/assets/posts/Codes/SVG_Figure/logo.png)](/posts/Codes/2024-10-21-SvgFigure) @@
+@@
+### [3. Read data from SVG/PDF Figure](/2024-10-21-SvgFigure)
+~~~
+<div style="clear: both"></div>
+~~~
+@@
 ---
 
 @@row
