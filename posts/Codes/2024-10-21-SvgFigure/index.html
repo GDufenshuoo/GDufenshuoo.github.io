@@ -82,14 +82,14 @@
 
 <!-- Content appended here -->
 <div class="franklin-content">
-<h2>前言</h2>
+<h2 id="前言"><a href="#前言" class="header-anchor">前言</a></h2>
 <p>组会上老师提出需要把图表中的数据提取出来这样的任务（属于是一种赛博体力活），根据常年使用PDF编辑器裁切需要的矢量图的经验<sup id="fnref:1"><a href="#fndef:1" class="fnref">[1]</a></sup>， 作为矢量图，必然是有精确的空间信息，再加上应该没人会无聊到加密图形，加上个位移量上去什么的，那从SVG/PDF图表中提取数据不是很合理嘛。 简单搜索一下，发现确实有这么一个还在积极维护的 Python<sup id="fnref:2"><a href="#fndef:2" class="fnref">[2]</a></sup> Pkg， 就是下面要介绍的：</p>
 <h1><a href="https://github.com/echemdb/svgdigitizer">svgdigitizer</a></h1>
 <p>在这里简要介绍一下<sup id="fnref:3"><a href="#fndef:3" class="fnref">[3]</a></sup>。</p>
 <p>除了着重强调的也是我们最关心的 </p>
 <p><strong>extracts metadata associated with the plot in the SVG</strong> </p>
 <p>当然还有许多其他功能，看LOGO&#33; 奇奇怪怪的图（如图）大约也是能提取的。</p>
-<p><img src="/assets/posts/Codes/SVG_Figure/logo.png" alt="" /></p>
+<p>&#33;&#91;&#93;&#40;/assets/posts/Codes/SVG_Figure/logo.png&#41;</p>
 <h3><a href="https://echemdb.github.io/svgdigitizer/usage.html">从PDF中提取</a></h3>
 <ol>
 <li><p>变PDF为SVG：使用 svgdigitizer 命令行输入 <code>svgdigitizer paginate Figure_name.pdf</code> 从 PDF 中创建 SVG。</p>
@@ -97,13 +97,15 @@
 <p><img src="/assets/posts/Codes/SVG_Figure/example_plot_p0.png" alt="" /></p>
 <p>能转换的图最低要：理论上每个坐标轴至少得有两个标数字的刻度线，曲线呢得是 bezier path 可以描绘的，这里应该是指光滑。</p>
 <p>然后结果是这样的：</p>
-<p><img src="/assets/posts/Codes/SVG_Figure/results.png" alt="" /></p>
+<p><img src="/assets/posts/Codes/SVG_Figure/looping_annotated.png" alt="" /></p>
 <p>我觉得应该不需要说什么了，完美！</p>
 </li>
 <li><p>描绘曲线（由于博主关注散点图，这个略去了）</p>
 <p>简而言之就是自己在这条离谱的图像曲线上，放几个关键点来用贝塞尔曲线能画出来，也就是 digital 数字化。请看他的<a href="https://echemdb.github.io/svgdigitizer/usage.html#curve-tracing">文档</a>。</p>
 </li>
 </ol>
+<p>总之最后的结果：</p>
+<p><img src="/assets/posts/Codes/SVG_Figure/results.png" alt="" /></p>
 <p>先写到这里，非常好，爱来自加班。</p>
 <p><table class="fndef" id="fndef:1">
     <tr>
