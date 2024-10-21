@@ -26,7 +26,7 @@ tags = ["Quantum"]
 
 当然还有许多其他功能，看LOGO! 奇奇怪怪的图（如图）大约也是能提取的。
 
-![](/assets/posts/Codes/SVG_Figure/logo.png)
+    ![](/assets/posts/Codes/SVG_Figure/logo.png)
 
 ### [从PDF中提取](https://echemdb.github.io/svgdigitizer/usage.html)
 
@@ -40,13 +40,18 @@ tags = ["Quantum"]
 
     然后结果是这样的：
 
-    ![](/assets/posts/Codes/SVG_Figure/results.png)
+    ![](/assets/posts/Codes/SVG_Figure/looping_annotated.png)
 
     我觉得应该不需要说什么了，完美！
 
 2. 描绘曲线（由于博主关注散点图，这个略去了）
 
     简而言之就是自己在这条离谱的图像曲线上，放几个关键点来用贝塞尔曲线能画出来，也就是 digital 数字化。请看他的[文档](https://echemdb.github.io/svgdigitizer/usage.html#curve-tracing)。
+
+总之最后的结果：
+
+![](/assets/posts/Codes/SVG_Figure/results.png)
+
 
 先写到这里，非常好，爱来自加班。
 
