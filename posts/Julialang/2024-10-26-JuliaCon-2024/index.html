@@ -1,0 +1,184 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.16.4 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <link rel="stylesheet" href="/libs/highlight/styles/github.min.css">
+   
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/minimal-mistakes.css">
+<link rel="stylesheet" href="/css/adjust.css">
+<link rel="icon" href="/assets/favicon.png">
+<!--[if IE ]>
+<style>
+  /* old IE unsupported flexbox fixes */
+  .greedy-nav .site-title {
+    padding-right: 3em;
+  }
+  .greedy-nav button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+  }
+</style>
+<![endif]-->
+
+   <title>A Short Cut of JuliaCon 2024</title>  
+  <!-- end custom head snippets -->
+</head>
+<body class="layout--single">
+  <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">CatGD's</a>
+        <ul class="visible-links">
+          <li class="masthead__menu-item"><a href="/Blogs/" >BLOGS</a></li>
+          <li class="masthead__menu-item"><a href="/Codes/" >Code blocks</a></li>
+          <li class="masthead__menu-item"><a href="/MyCollection/" >Good Things</a></li>
+          <li class="masthead__menu-item"><a href="/TagPage/">Tags</a></li>
+        </ul>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+  <div class="initial-content">
+    <div id="main" role="main">
+      <div class="sidebar sticky">
+        <div itemscope itemtype="https://schema.org/Person">
+          <div class="author__avatar">
+            <img src="/assets/Fox.jpg" alt="Cat GD" itemprop="image">
+          </div>
+          <div class="author__content">
+            <h3 class="author__name" itemprop="name">Cat GD</h3>
+            <p class="author__bio" itemprop="description">Not very clear.</p>
+          </div>
+          <div class="author__urls-wrapper">
+            <button class="btn btn--inverse">Links</button>
+            <ul class="author__urls social-icons">
+              <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+                <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">China</span></li>
+              <!-- <li><a href="https://twitter.com/mmistakes" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li> -->
+              <li><a href="https://github.com/GDufenshuoo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+<!-- Content appended here -->
+<div class="franklin-content">
+<h1 id="juliacon_2024"><a href="#juliacon_2024" class="header-anchor">JuliaCon 2024</a></h1>
+<p>一年一度的 <a href="https://juliacon.org/2024/">JuliaCon</a> 盛会已经在7月份成功举行了。</p>
+<p>
+<figure style="text-align: center; margin: 0;">
+    <img src="/assets/posts/Julialang/JuliaCon 2024_big.png" style="display: block; margin: 0 auto; padding: 0;  width:90%;" alt=" "/>
+    <figcaption style="text-align: center; margin-top: 10px;"> </figcaption>
+</figure>
+ 
+<figcaption style="text-align: center; margin-top: 10px; font-family: "Times New Roman", Times, serif; font-style: italic;"> JuliaCon 2024 官网主页（截取自2024/10/24）</figcaption>
+</p>
+<p>这一届又出现了许多新的 Julialang 特性与 Pkg 介绍。现在演讲视频陆续上传到 YouTube，乱逛发现有的还蛮有意思，正好发现好多喜欢的Pkg 之前没留意都忘记了，于是来写个Blog记录一下以便索引（顺便给Julialang打个广告什么的）。</p>
+<h1 id="cats_精选"><a href="#cats_精选" class="header-anchor">Cat&#39;s 精选</a></h1>
+<h2 id="无缝过渡从单核_python_到_julia_多_gpu_作者塞缪尔奥姆林"><a href="#无缝过渡从单核_python_到_julia_多_gpu_作者塞缪尔奥姆林" class="header-anchor">无缝过渡从单核 Python 到 Julia 多 GPU 作者：塞缪尔·奥姆林</a></h2>
+<p>PreTalx: <a href="https://pretalx.com/juliacon2024/talk/N779AY/">https://pretalx.com/juliacon2024/talk/N779AY/</a></p>
+<blockquote>
+<p>Check points for correctness can be straightforwardly defined for ported and verified code blocks in order to later automatically signal potential issues that manifest due to refactoring work or consideration of new input classes. We have demonstrated the approach&#39;s effectiveness in a real-world use case, a collaboration between domain scientists and HPC experts in the scope of Europe&#39;s Human Brain Project &#40;HBP&#41;. Based on a single-CPU-core Python prototype developed by the domain scientists, we have jointly created a Julia application for Bayesian optimization of hyper-parameters of a neurological network that is deployable on the world&#39;s largest GPU supercomputers and achieves near optimal performance and scaling. Furthermore, as a result of the automatic correctness verification, the domain scientists - with no previous Julia experience - could quickly gain confidence in the ported Julia application, which is an important aspect in HPC collaboration projects as the presented one. The Julia application serves the domain scientists now also for further prototyping: leveraging <a href="https://github.com/omlins/ParallelStencil.jl">ParallelStencil.jl</a> has made it feasible to fully unify prototyping and production in a single code that is deployable on a single CPU core or thousands of GPUs.</p>
+</blockquote>
+<p>作者介绍了如何在熟悉 Python 但不太会 Julia 时，使用 PyCall 来在 Julia 中调用 Python 代码（也能反过来调用）</p>
+<pre><code class="language-julia"># Call Python Pkg
+using PyCall
+math &#61; pyimport&#40;&quot;math&quot;&#41;
+math.sin&#40;math.pi / 4&#41; # returns ≈ 1/√2 &#61; 0.70710678...
+
+# Run Python Codes Directly
+py&quot;&quot;&quot;
+import numpy as np
+
+def sinpi&#40;x&#41;:
+    return np.sin&#40;np.pi * x&#41;
+&quot;&quot;&quot;
+py&quot;sinpi&quot;&#40;1&#41;
+
+# Python Build-in Function
+@pywith pybuiltin&#40;&quot;open&quot;&#41;&#40;&quot;file.txt&quot;,&quot;w&quot;&#41; as f begin
+    f.write&#40;&quot;hello&quot;&#41;
+end</code></pre>
+<p>并行方面使用了 <a href="https://github.com/omlins/ParallelStencil.jl">ParallelStencil.jl</a></p>
+<p>ParallelStencil 能够为 GPU 和 CPU 上的并行高性能模板计算编写与架构无关的高级代码。</p>
+<p>
+<figure style="text-align: center; margin: 0;">
+    <img src="/assets/posts/Julialang/ParallelStencil_perf_ps2.png" style="display: block; margin: 0 auto; padding: 0;  width:70%;" alt=" "/>
+    <figcaption style="text-align: center; margin-top: 10px;"> </figcaption>
+</figure>
+ 
+<figcaption style="text-align: center; margin-top: 10px; font-family: "Times New Roman", Times, serif; font-style: italic;"> 在 2020 年 JuliaCon 上呈现的 2-D 浅冰求解器实现的性能比相应的 GPU 数组编程实现提高了近 20 倍；达到了所使用的 Nvidia P100 GPU 理论上限性能的 70%（T_eff 与常见的吞吐量指标不同）。求解器的 GPU 性能以绿色表示，CPU 性能以蓝色表示。</figcaption>
+</p>
+<p>ParallelStencil.jl 编写的代码能够同时支持 CPU &amp; GPU 同时支持依赖于 Enzyme.jl 的内核并行的自动微分，属于一种通用的高级抽象架构。</p>
+<p>
+<figure style="text-align: center; margin: 0;">
+    <img src="/assets/posts/Julialang/par_eff_c_julia2.png" style="display: block; margin: 0 auto; padding: 0;  width:90%;" alt=" "/>
+    <figcaption style="text-align: center; margin-top: 10px;"> </figcaption>
+</figure>
+ 
+<figcaption style="text-align: center; margin-top: 10px; font-family: "Times New Roman", Times, serif; font-style: italic;"> 得益于ParallelStencil 隐藏通信的特性，在 Piz Daint 超级计算机上 1024 个 GPU 运行的 3-D 孔隙水力机械实际程序中表现出了接近理想的弱缩放。</figcaption>
+</p>
+<p>非常简单的使用 <code>@parallel</code>（这里没有考虑任何优化）即可实现多个架构的并行。</p>
+<pre><code class="language-Julia">#&#40;...&#41;
+@init_parallel_stencil&#40;CUDA,...&#41;
+#&#40;...&#41;
+@parallel function diffusion3D_step&#33;&#40;...&#41;
+    #&#40;...&#41;
+end
+#&#40;...&#41;
+@parallel diffusion3D_step&#33;&#40;...&#41;</code></pre>
+<h2 id="待续"><a href="#待续" class="header-anchor">待续</a></h2>
+<div class="page-foot">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Cat GD. Last modified: October 26, 2024.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div><!-- CONTENT ENDS HERE -->
+
+      </div> <!-- closure of main -->
+    </div>   <!-- closure of class initial--content -->
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+        <!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+          <ul class="social-icons">
+            <li><strong>Links:</strong></li>
+            <!-- <li><a href="https://twitter.com/mmistakes" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li> -->
+            <li><a href="https://github.com/GDufenshuoo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="page__footer-copyright">&copy; Cat GD. Powered by <a href="https://github.com/tlienart/Franklin.jl">Franklin</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="/libs/minimal-mistakes/main.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
+
+    
+    
+        <script src="/libs/highlight/highlight.min.js"></script>
+<script>hljs.highlightAll();hljs.configure({tabReplace: '    '});</script>
+
+    
+  </body>
+</html>
