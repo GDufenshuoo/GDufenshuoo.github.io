@@ -22,8 +22,16 @@ Welcome to my blog page - both technical and non-technical. Enjoy :)
 <div style="clear: both"></div>
 ~~~
 @@
----
 
+@@row
+@@container
+@@[![](/assets/posts/Julialang/JuliaCon 2024.png)](/posts/Codes/2024-10-26-JuliaCon-2024) @@
+@@
+@@
+
+
+
+---
 @@row
 @@container
 @@[![](/assets/posts/AfunComic.jpeg)]() @@
