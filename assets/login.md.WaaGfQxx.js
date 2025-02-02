@@ -1,1 +1,0 @@
-import{_ as o,c as t,G as n,B as a,o as r}from"./chunks/framework.CK5z3Rsb.js";const g=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"login.md","filePath":"login.md"}'),s={name:"login.md"};function c(i,l,p,_,d,m){const e=a("Login",!0);return r(),t("div",null,[n(e)])}const u=o(s,[["render",c]]);export{g as __pageData,u as default};

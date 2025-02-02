@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a}from"./chunks/framework.CK5z3Rsb.js";const d=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"tech-articles.md","filePath":"tech-articles.md"}'),c={name:"tech-articles.md"};function r(s,o,n,i,l,p){return a(),t("div")}const m=e(c,[["render",r]]);export{d as __pageData,m as default};

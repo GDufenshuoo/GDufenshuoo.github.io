@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a}from"./chunks/framework.CK5z3Rsb.js";const p=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"mymind!.md","filePath":"mymind!.md"}'),n={name:"mymind!.md"};function r(m,o,s,c,d,i){return a(),t("div")}const f=e(n,[["render",r]]);export{p as __pageData,f as default};
