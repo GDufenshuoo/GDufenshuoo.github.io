@@ -1,1 +1,0 @@
-import{_ as t,c as e,o as a}from"./chunks/framework.CK5z3Rsb.js";const d=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"fun-stuff.md","filePath":"fun-stuff.md"}'),f={name:"fun-stuff.md"};function n(s,r,o,c,u,p){return a(),e("div")}const i=t(f,[["render",n]]);export{d as __pageData,i as default};
