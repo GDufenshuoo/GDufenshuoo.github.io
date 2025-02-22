@@ -1,0 +1,5 @@
+import{p as c,v as i,c as d,j as t,o as m}from"./chunks/framework.ChSLcS_6.js";const p=JSON.parse('{"title":"随机跳转","description":"","frontmatter":{"layout":"home","title":"随机跳转"},"headers":[],"relativePath":"Luckly.md","filePath":"Luckly.md"}'),u={name:"Luckly.md"},b=Object.assign(u,{setup(f){const n=c(["https://b23.tv/DjSZ1T4"]),r=()=>{const o=Math.floor(Math.random()*n.value.length),e=n.value[o];console.log("跳转到网站:",e),window.location.href=e},s=o=>{let e=o;const l=document.getElementById("countdown"),a=setInterval(()=>{e>0?l.innerHTML=`
+                <h1 style="font-size: 2rem; color:#8A9BC8">好啦，我想好了!</h1>
+                <h1 style="font-size: 2rem; color:#8A9BC8">倒数 ${e-1} 秒!</h1>
+                <h1 style="font-size: 1rem; color:#8A9BC8"></h1>
+            `:(clearInterval(a),r()),e--},1e3)};return i(()=>{s(4)}),(o,e)=>(m(),d("div",null,e[0]||(e[0]=[t("div",{style:{"text-align":"center"}},[t("br"),t("br"),t("br"),t("h1",{style:{"font-size":"3rem","font-weight":"bold",color:"rgb(215, 104, 0)"}},"我来帮你选"),t("br"),t("p",{id:"countdown",style:{"font-size":"2.5rem",color:"rgb(240, 183, 76)"}},"让我找找看...")],-1)])))}});export{p as __pageData,b as default};
