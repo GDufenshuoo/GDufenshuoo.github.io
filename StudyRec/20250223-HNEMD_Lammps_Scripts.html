@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Use HNEMD Method to Calculate Thermal Conductivity | ZilongWang's Blogs</title>
+    <meta name="description" content="My Collections that maybe insteresting.">
+    <meta name="generator" content="VitePress v1.6.3">
+    <link rel="preload stylesheet" href="/assets/style.zsHKaX0x.css" as="style">
+    <link rel="preload stylesheet" href="/vp-icons.css" as="style">
+    
+    <script type="module" src="/assets/app.DNAohJ34.js"></script>
+    <link rel="preload" href="/assets/inter-roman-latin.Di8DUHzh.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="modulepreload" href="/assets/chunks/theme.BWcge1iw.js">
+    <link rel="modulepreload" href="/assets/chunks/framework.ChSLcS_6.js">
+    <link rel="modulepreload" href="/assets/StudyRec_20250223-HNEMD_Lammps_Scripts.md.tQ-dR3lu.lean.js">
+    <script id="check-dark-mode">(()=>{const e=localStorage.getItem("vitepress-theme-appearance")||"auto",a=window.matchMedia("(prefers-color-scheme: dark)").matches;(!e||e==="auto"?a:e==="dark")&&document.documentElement.classList.add("dark")})();</script>
+    <script id="check-mac-os">document.documentElement.classList.toggle("mac",/Mac|iPhone|iPod|iPad/i.test(navigator.platform));</script>
+  </head>
+  <body>
+    <div id="app"><div class="Layout" data-v-5d98c3a5><!--[--><!--]--><!--[--><span tabindex="-1" data-v-0b0ada53></span><a href="#VPContent" class="VPSkipLink visually-hidden" data-v-0b0ada53>Skip to content</a><!--]--><!----><header class="VPNav" data-v-5d98c3a5 data-v-ae24b3ad><div class="VPNavBar" data-v-ae24b3ad data-v-6aa21345><div class="wrapper" data-v-6aa21345><div class="container" data-v-6aa21345><div class="title" data-v-6aa21345><div class="VPNavBarTitle" data-v-6aa21345 data-v-1168a8e4><a class="title" href="/" data-v-1168a8e4><!--[--><!--]--><!----><span data-v-1168a8e4>ZilongWang&#39;s Blogs</span><!--[--><!--]--></a></div></div><div class="content" data-v-6aa21345><div class="content-body" data-v-6aa21345><!--[--><!--]--><div class="VPNavBarSearch search" data-v-6aa21345><!----></div><nav aria-labelledby="main-nav-aria-label" class="VPNavBarMenu menu" data-v-6aa21345 data-v-dc692963><span id="main-nav-aria-label" class="visually-hidden" data-v-dc692963> Main Navigation </span><!--[--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/" tabindex="0" data-v-dc692963 data-v-e56f3d57><!--[--><span data-v-e56f3d57>Home</span><!--]--></a><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/tech-articles.html" tabindex="0" data-v-dc692963 data-v-e56f3d57><!--[--><span data-v-e56f3d57>Blogs</span><!--]--></a><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/login.html" tabindex="0" data-v-dc692963 data-v-e56f3d57><!--[--><span data-v-e56f3d57>Login</span><!--]--></a><!--]--><!--]--></nav><!----><div class="VPNavBarAppearance appearance" data-v-6aa21345 data-v-6c893767><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-checked="false" data-v-6c893767 data-v-5337faa4 data-v-1d5665e3><span class="check" data-v-1d5665e3><span class="icon" data-v-1d5665e3><!--[--><span class="vpi-sun sun" data-v-5337faa4></span><span class="vpi-moon moon" data-v-5337faa4></span><!--]--></span></span></button></div><div class="VPSocialLinks VPNavBarSocialLinks social-links" data-v-6aa21345 data-v-0394ad82 data-v-7bc22406><!--[--><a class="VPSocialLink no-icon" href="https://github.com/GDufenshuoo" aria-label="github" target="_blank" rel="noopener" data-v-7bc22406 data-v-bd121fe5><span class="vpi-social-github"></span></a><!--]--></div><div class="VPFlyout VPNavBarExtra extra" data-v-6aa21345 data-v-bb2aa2f0 data-v-cf11d7a2><button type="button" class="button" aria-haspopup="true" aria-expanded="false" aria-label="extra navigation" data-v-cf11d7a2><span class="vpi-more-horizontal icon" data-v-cf11d7a2></span></button><div class="menu" data-v-cf11d7a2><div class="VPMenu" data-v-cf11d7a2 data-v-b98bc113><!----><!--[--><!--[--><!----><div class="group" data-v-bb2aa2f0><div class="item appearance" data-v-bb2aa2f0><p class="label" data-v-bb2aa2f0>Appearance</p><div class="appearance-action" data-v-bb2aa2f0><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-checked="false" data-v-bb2aa2f0 data-v-5337faa4 data-v-1d5665e3><span class="check" data-v-1d5665e3><span class="icon" data-v-1d5665e3><!--[--><span class="vpi-sun sun" data-v-5337faa4></span><span class="vpi-moon moon" data-v-5337faa4></span><!--]--></span></span></button></div></div></div><div class="group" data-v-bb2aa2f0><div class="item social-links" data-v-bb2aa2f0><div class="VPSocialLinks social-links-list" data-v-bb2aa2f0 data-v-7bc22406><!--[--><a class="VPSocialLink no-icon" href="https://github.com/GDufenshuoo" aria-label="github" target="_blank" rel="noopener" data-v-7bc22406 data-v-bd121fe5><span class="vpi-social-github"></span></a><!--]--></div></div></div><!--]--><!--]--></div></div></div><!--[--><!--]--><button type="button" class="VPNavBarHamburger hamburger" aria-label="mobile navigation" aria-expanded="false" aria-controls="VPNavScreen" data-v-6aa21345 data-v-e5dd9c1c><span class="container" data-v-e5dd9c1c><span class="top" data-v-e5dd9c1c></span><span class="middle" data-v-e5dd9c1c></span><span class="bottom" data-v-e5dd9c1c></span></span></button></div></div></div></div><div class="divider" data-v-6aa21345><div class="divider-line" data-v-6aa21345></div></div></div><!----></header><div class="VPLocalNav empty fixed" data-v-5d98c3a5 data-v-a6f0e41e><div class="container" data-v-a6f0e41e><!----><div class="VPLocalNavOutlineDropdown" style="--vp-vh:0px;" data-v-a6f0e41e data-v-8a42e2b4><button data-v-8a42e2b4>Return to top</button><!----></div></div></div><!----><div class="VPContent" id="VPContent" data-v-5d98c3a5 data-v-1428d186><div class="VPDoc has-aside" data-v-1428d186 data-v-39a288b8><!--[--><!--]--><div class="container" data-v-39a288b8><div class="aside" data-v-39a288b8><div class="aside-curtain" data-v-39a288b8></div><div class="aside-container" data-v-39a288b8><div class="aside-content" data-v-39a288b8><div class="VPDocAside" data-v-39a288b8 data-v-3f215769><!--[--><!--]--><!--[--><!--]--><nav aria-labelledby="doc-outline-aria-label" class="VPDocAsideOutline" data-v-3f215769 data-v-a5bbad30><div class="content" data-v-a5bbad30><div class="outline-marker" data-v-a5bbad30></div><div aria-level="2" class="outline-title" id="doc-outline-aria-label" role="heading" data-v-a5bbad30>On this page</div><ul class="VPDocOutlineItem root" data-v-a5bbad30 data-v-b933a997><!--[--><!--]--></ul></div></nav><!--[--><!--]--><div class="spacer" data-v-3f215769></div><!--[--><!--]--><!----><!--[--><!--]--><!--[--><!--]--></div></div></div></div><div class="content" data-v-39a288b8><div class="content-container" data-v-39a288b8><!--[--><!--]--><main class="main" data-v-39a288b8><div style="position:relative;" class="vp-doc _StudyRec_20250223-HNEMD_Lammps_Scripts" data-v-39a288b8><div><h1 id="use-hnemd-method-to-calculate-thermal-conductivity" tabindex="-1"><div style="text-align:center;"><h1 style="font-size:1.7rem;font-weight:bold;">Use HNEMD Method to Calculate Thermal Conductivity</h1></div> <a class="header-anchor" href="#use-hnemd-method-to-calculate-thermal-conductivity" aria-label="Permalink to &quot;&lt;div style=&quot;text-align: center;&quot;&gt;&lt;h1 style=&quot;font-size: 1.7rem; font-weight: bold&quot;&gt;Use HNEMD Method to Calculate Thermal Conductivity&lt;/h1&gt;&lt;/div&gt;&quot;">​</a></h1><div style="text-align:center;"><h1 style="font-size:1.7rem;font-weight:bold;">使用HNEMD方法计算热导率</h1></div><h2 id="方法简介" tabindex="-1">方法简介 <a class="header-anchor" href="#方法简介" aria-label="Permalink to &quot;方法简介&quot;">​</a></h2><p>在材料科学和工程领域，热导率是衡量材料导热性能的关键参数，直接影响电子器件散热、能源材料设计和纳米技术应用。传统的实验测量方法往往耗时且成本高昂，而分子动力学（MD）模拟作为一种强大的理论工具，能够从原子尺度揭示热输运机制。然而，传统的非平衡分子动力学（NEMD）方法与平衡分子动力学（EMD）方法在模拟中常面临边界效应和计算效率低的问题。<strong>HNEMD（Homogeneous Non-Equilibrium Molecular Dynamics）</strong> 方法通过均匀施加热流而非依赖温度梯度，避免了传统方法中因温度梯度导致的边界扰动问题，尤其适用于纳米材料、低维体系等对边界敏感的场景，显著提升了热导率计算的效率和准确性，同时由于体系温度均一，从而与EMD一样对体系大小不敏感。HNEMD方法相比于EMD方法在计算效率上提升了两个数量级。</p><div class="custom-image"><p><img src="/assets/image.BrfSyDbU.png" alt="shap_interaction_matrix"></p></div><h2 id="算法简介" tabindex="-1">算法简介 <a class="header-anchor" href="#算法简介" aria-label="Permalink to &quot;算法简介&quot;">​</a></h2><p>根据文献提出的一种可以直接在计算机上实现的明确算法。HNEMD模拟包括以下步骤：</p><ol><li><p><strong>平衡阶段</strong>。首先，与任何分子动力学（MD）模拟一样，我们在 <!----> 或 <!----> 系综中对系统进行平衡，以达到热平衡。需要注意的是，与EMD方法相同，必须在输运方向上应用周期性边界条件。</p></li><li><p><strong>模拟阶段</strong>。其次，通过在原子间作用力上叠加由公式</p></li></ol><!----><p>给出的驱动力来生成均匀的热流：</p><!----><p>从而得到总力：</p><!----><p>为了保持系统的总动量守恒，必须从每个粒子的力中减去系统的平均力。</p><!----><p>在此阶段，还需要应用热浴以保持系统温度在目标值；否则，系统会因驱动力而升温。</p><ol start="3"><li><strong>后处理</strong>。最后，我们根据公式</li></ol><!----><p>对热流进行采样，并根据公式</p><!----><p>计算热导率。</p><h2 id="lammps实现" tabindex="-1">lammps实现 <a class="header-anchor" href="#lammps实现" aria-label="Permalink to &quot;lammps实现&quot;">​</a></h2><p>经过几轮折腾，实现过多种方法，最后实现了在LAMMPS脚本中实现全部计算。 当然lammps插件形式也有，不知道有没有人感兴趣。 花了很多力气高，最后没有派上什么用场......</p><!----><p>下面的例子实现了计算KA体系热导率的lammps输入文件。</p><div class="language-lammps vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">lammps</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span># =======================================================================</span></span>
+<span class="line"><span># ================================ System ===============================</span></span>
+<span class="line"><span>units lj</span></span>
+<span class="line"><span>atom_style atomic</span></span>
+<span class="line"><span>dimension 3</span></span>
+<span class="line"><span>boundary p p p</span></span>
+<span class="line"><span># ============================== set System =============================</span></span>
+<span class="line"><span>variable    Temp        equal   0.8</span></span>
+<span class="line"><span>variable    dt          equal   0.005</span></span>
+<span class="line"><span>variable    natoms      equal   1000</span></span>
+<span class="line"><span>variable    density     equal   1.2</span></span>
+<span class="line"><span>variable    volume      equal   ${natoms}/${density}</span></span>
+<span class="line"><span>variable    box_length  equal   ${volume}^(1.0/3.0)</span></span>
+<span class="line"><span># ============================= restart part ============================</span></span>
+<span class="line"><span>variable    restart_file_exists equal 1</span></span>
+<span class="line"><span>restart 1000000 restart.*.restart</span></span>
+<span class="line"><span>if &quot;${restart_file_exists} == 1&quot; then &amp;</span></span>
+<span class="line"><span>  &quot;read_restart restart.1000000.restart&quot; &amp;</span></span>
+<span class="line"><span>  &quot;jump SELF HNEMD&quot;</span></span>
+<span class="line"><span># ============================== create box =============================</span></span>
+<span class="line"><span>region box block 0 ${box_length} 0 ${box_length} 0 ${box_length}</span></span>
+<span class="line"><span>create_box 2 box</span></span>
+<span class="line"><span># ============================= create atoms ============================</span></span>
+<span class="line"><span>variable    natoms1     equal   round(${natoms}*0.8)</span></span>
+<span class="line"><span>variable    natoms2     equal   ${natoms}-${natoms1}</span></span>
+<span class="line"><span>create_atoms 1 random ${natoms1} 12345 box</span></span>
+<span class="line"><span>create_atoms 2 random ${natoms2} 67890 box</span></span>
+<span class="line"><span>mass 1 1.0</span></span>
+<span class="line"><span>mass 2 1.0</span></span>
+<span class="line"><span># ========================== create Potential ===========================</span></span>
+<span class="line"><span># Lennard-Jones Potential paramaters</span></span>
+<span class="line"><span>pair_style  lj/cut  2.5</span></span>
+<span class="line"><span>pair_coeff  1   1   1.0 1.0     2.5</span></span>
+<span class="line"><span>pair_coeff  1   2   1.5 0.8     2.0</span></span>
+<span class="line"><span>pair_coeff  2   2   0.5 0.88    2.2</span></span>
+<span class="line"><span># ============================ create group =============================</span></span>
+<span class="line"><span>group A type 1</span></span>
+<span class="line"><span>group B type 2</span></span>
+<span class="line"><span># ============================== MD parts ===============================</span></span>
+<span class="line"><span># ============================ neighbor list ============================</span></span>
+<span class="line"><span>neighbor 0.5 bin</span></span>
+<span class="line"><span>neigh_modify delay 0 every 3 check yes</span></span>
+<span class="line"><span># ============================== minimize ===============================</span></span>
+<span class="line"><span>min_style sd</span></span>
+<span class="line"><span>minimize 1.e-7 1.e-7 1000 5000</span></span>
+<span class="line"><span># write_data &quot;minnimize.data&quot; pair ij</span></span>
+<span class="line"><span># ============================== initilize ==============================</span></span>
+<span class="line"><span>velocity all create ${Temp} 188546 dist gaussian mom yes loop all</span></span>
+<span class="line"><span>timestep ${dt}</span></span>
+<span class="line"><span># ============================ equilibrium ==============================</span></span>
+<span class="line"><span>fix 1 all nvt temp ${Temp} ${Temp} 0.5</span></span>
+<span class="line"><span>thermo 100</span></span>
+<span class="line"><span>thermo_style custom step temp pe etotal</span></span>
+<span class="line"><span>run 1000000</span></span>
+<span class="line"><span># =======================================================================</span></span>
+<span class="line"><span>label HNEMD</span></span>
+<span class="line"><span># thermal conductivity calculation</span></span>
+<span class="line"><span># =======================================================================</span></span>
+<span class="line"><span># ======== Homogeneous nonequilibrium molecular dynamics method =========</span></span>
+<span class="line"><span># ============================== Parameters =============================</span></span>
+<span class="line"><span>variable    Fe_ix   equal   0.005</span></span>
+<span class="line"><span>variable    Fe_iy   equal   0.005</span></span>
+<span class="line"><span>variable    Fe_iz   equal   0.005</span></span>
+<span class="line"><span>variable    Fe_x    atom    v_Fe_ix</span></span>
+<span class="line"><span>variable    Fe_y    atom    v_Fe_iy</span></span>
+<span class="line"><span>variable    Fe_z    atom    v_Fe_iz</span></span>
+<span class="line"><span># =======================================================================</span></span>
+<span class="line"><span># =============================== Scripts ===============================</span></span>
+<span class="line"><span>compute     myKE    all     ke/atom</span></span>
+<span class="line"><span>compute     myPE    all     pe/atom</span></span>
+<span class="line"><span>compute     Wij     all     stress/atom NULL virial</span></span>
+<span class="line"><span># ===============================  begin  ===============================</span></span>
+<span class="line"><span># ====================== compute and add the force ======================</span></span>
+<span class="line"><span>variable    Eng     atom    c_myKE+c_myPE</span></span>
+<span class="line"><span>variable    fex     atom    v_Eng*v_Fe_x-c_Wij[1]*v_Fe_x-c_Wij[4]*v_Fe_y-c_Wij[5]*v_Fe_z</span></span>
+<span class="line"><span>variable    fey     atom    v_Eng*v_Fe_y-c_Wij[4]*v_Fe_x-c_Wij[2]*v_Fe_y-c_Wij[6]*v_Fe_z</span></span>
+<span class="line"><span>variable    fez     atom    v_Eng*v_Fe_x-c_Wij[5]*v_Fe_x-c_Wij[6]*v_Fe_y-c_Wij[3]*v_Fe_z</span></span>
+<span class="line"><span>variable    Jex     atom    v_Eng*vx-c_Wij[1]*vx-c_Wij[4]*vy-c_Wij[5]*vz      # debug</span></span>
+<span class="line"><span>variable    Jey     atom    v_Eng*vy-c_Wij[4]*vx-c_Wij[2]*vy-c_Wij[6]*vz      # debug</span></span>
+<span class="line"><span>variable    Jez     atom    v_Eng*vz-c_Wij[5]*vx-c_Wij[6]*vy-c_Wij[3]*vz      # debug</span></span>
+<span class="line"><span>compute     hc  all reduce  sum v_Jex   v_Jey   v_Jez</span></span>
+<span class="line"><span>compute     Fe  all reduce  sum v_fex   v_fey   v_fez</span></span>
+<span class="line"><span># ===================== reduce force of mass center =====================</span></span>
+<span class="line"><span>variable    fxe     equal  -c_Fe[1]</span></span>
+<span class="line"><span>variable    fye     equal  -c_Fe[2]</span></span>
+<span class="line"><span>variable    fze     equal  -c_Fe[3]</span></span>
+<span class="line"><span>variable    fix_fx  atom    v_fxe/${natoms}</span></span>
+<span class="line"><span>variable    fix_fy  atom    v_fye/${natoms}</span></span>
+<span class="line"><span>variable    fix_fz  atom    v_fze/${natoms}</span></span>
+<span class="line"><span>variable    add_fx  atom    v_fix_fx+v_fex</span></span>
+<span class="line"><span>variable    add_fy  atom    v_fix_fy+v_fey</span></span>
+<span class="line"><span>variable    add_fz  atom    v_fix_fz+v_fez</span></span>
+<span class="line"><span>fix Fe  all addforce    v_add_fx    v_add_fy    v_add_fz</span></span>
+<span class="line"><span># ============================  heat flux  ==============================</span></span>
+<span class="line"><span>compute     flux    all     heat/flux   myKE    myPE    Wij    </span></span>
+<span class="line"><span>variable    Jx      equal   c_flux[1]</span></span>
+<span class="line"><span>variable    Jy      equal   c_flux[2]</span></span>
+<span class="line"><span>variable    Jz      equal   c_flux[3]</span></span>
+<span class="line"><span>variable    Jhx     equal   c_flux[4]</span></span>
+<span class="line"><span>variable    Jhy     equal   c_flux[5]</span></span>
+<span class="line"><span>variable    Jhz     equal   c_flux[6]</span></span>
+<span class="line"><span># ========================  Thermal Conductivity  =======================</span></span>
+<span class="line"><span>variable    K_x     equal   v_Jx/(${Temp}*vol*v_Fe_ix)</span></span>
+<span class="line"><span>variable    K_y     equal   v_Jy/(${Temp}*vol*v_Fe_iy)</span></span>
+<span class="line"><span>variable    K_z     equal   v_Jz/(${Temp}*vol*v_Fe_iz)</span></span>
+<span class="line"><span>variable    K_sum   equal   (v_K_x+v_K_y+v_K_z)/3</span></span>
+<span class="line"><span># =====================  Thermal Conductivity dump  =====================</span></span>
+<span class="line"><span>fix kappa   all print   1   &quot;${K_x} ${K_y} ${K_z} ${K_sum}&quot; file    data.kappa  screen  no</span></span>
+<span class="line"><span># ==========================  heat flux dump  ===========================</span></span>
+<span class="line"><span># dump heatflux all custom 1000 dump.custom id type v_Jex v_Jey v_Jez</span></span>
+<span class="line"><span>### dump  debug all custom 100 dump.velocities id type fx fy fz v_fex v_fey v_fez v_Eng  # debug</span></span>
+<span class="line"><span># ======================  end of the modify part  =======================</span></span>
+<span class="line"><span># =======================================================================</span></span>
+<span class="line"><span># =======================================================================</span></span>
+<span class="line"><span># ================================== MD =================================</span></span>
+<span class="line"><span>fix 1 all nvt temp ${Temp} ${Temp} 0.5</span></span>
+<span class="line"><span>thermo 100</span></span>
+<span class="line"><span>thermo_style custom step temp pe etotal v_K_x v_K_y v_K_z v_K_sum v_Jx v_Jy v_Jz</span></span>
+<span class="line"><span># thermo_modify norm no</span></span>
+<span class="line"><span>run 1000000</span></span></code></pre></div></div></div></main><footer class="VPDocFooter" data-v-39a288b8 data-v-e257564d><!--[--><!--]--><!----><!----></footer><!--[--><!--]--></div></div></div><!--[--><!--]--></div></div><footer class="VPFooter" data-v-5d98c3a5 data-v-e315a0ad><div class="container" data-v-e315a0ad><!----><p class="copyright" data-v-e315a0ad>© 2025 ZilongWang's Blogs。保留所有权利。 | All Rights Reserved.</p></div></footer><!--[--><!--]--></div></div>
+    <script>window.__VP_HASH_MAP__=JSON.parse("{\"blogs_20250203-hnemd.md\":\"A0gr-pJx\",\"blogs_20250204.md\":\"4PwKz5xL\",\"blogs_20250207-边骑少年.md\":\"CiN9Xddd\",\"blogs_api-examples.md\":\"By94Nl0I\",\"blogs_markdown-examples.md\":\"Brd4LPCS\",\"diary.md\":\"DYAHxXkb\",\"fun-stuff.md\":\"NdtK1IhL\",\"index.md\":\"DrmAad53\",\"login.md\":\"SyOouPM9\",\"luckly.md\":\"DeyGGImW\",\"mymind!.md\":\"pvNvwy5r\",\"studyrec_20250213-模拟架构管理以及高通量计算.md\":\"DYvbxo9C\",\"studyrec_20250215-machinelearning.md\":\"D0iOvJYE\",\"studyrec_20250216-xgboost-shap.md\":\"DR0Ub4M5\",\"studyrec_20250217-2024llmhackinsci.md\":\"CoLA4sSs\",\"studyrec_20250217-topological-quantum-field-theory.md\":\"CL2OF7yT\",\"studyrec_20250221-dodecaknots.md\":\"DD9NWimE\",\"studyrec_20250223-hnemd_lammps_scripts.md\":\"tQ-dR3lu\",\"tech-articles.md\":\"CmCxdctW\",\"timeline.md\":\"Zcwy4inu\"}");window.__VP_SITE_DATA__=JSON.parse("{\"lang\":\"en-US\",\"dir\":\"ltr\",\"title\":\"ZilongWang's Blogs\",\"description\":\"My Collections that maybe insteresting.\",\"base\":\"/\",\"head\":[],\"router\":{\"prefetchLinks\":true},\"appearance\":true,\"themeConfig\":{\"nav\":[{\"text\":\"Home\",\"link\":\"/\"},{\"text\":\"Blogs\",\"link\":\"/tech-articles\"},{\"text\":\"Login\",\"link\":\"/login\"}],\"footer\":{\"copyright\":\"© 2025 ZilongWang's Blogs。保留所有权利。 | All Rights Reserved.\"},\"sidebar\":[],\"socialLinks\":[{\"icon\":\"github\",\"link\":\"https://github.com/GDufenshuoo\"}]},\"locales\":{},\"scrollOffset\":134,\"cleanUrls\":false}");</script>
+    
+  </body>
+</html>
